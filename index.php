@@ -1,10 +1,5 @@
 <?php
-/**
- * Created by PhpStorm.
- * User: Alexander
- * Date: 08/03/2018
- * Time: 15:58
- */
+include_once ('inc/db.inc.php');
 
 ?><!doctype html>
 <html lang="en">

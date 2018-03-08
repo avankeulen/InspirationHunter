@@ -8,21 +8,24 @@ include_once ('inc/db.inc.php');
     <meta name="viewport"
           content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <title>Document</title>
+    <title>Register</title>
 </head>
 <body>
 
 <form action="" method="post">
     <label for="email">Email</label>
-    <input type="text" name="password" id="email">
+    <input type="text" name="email" id="email">
 
     <label for="password">Password</label>
     <input type="password" name="password" id="password">
 
-    <input type="submit" value="Login">
+    <label for="password-confirm">Confirm Password</label>
+    <input type="password" name="password-confirm" id="password-confirm">
+
+    <input type="submit">
 </form>
 
-<a href="register.php">Create account.</a>
+<a href="login.php">Already have an account?</a>
 
 </body>
 </html>
