@@ -1,5 +1,7 @@
 <?php
 
+include_once ('Db.class.php');
+
 class Login {
     private $username;
     private $password;
@@ -37,7 +39,7 @@ class Login {
     }
 
     public function canLogin() {
-        $conn = new PDO('mysql:host=localhost; dbname=inspiration', 'root', 'root');
+        $conn = Db::getInstance();
         $statement = $conn->prepare("select password from users where username = :username");
         $statement->bindValue(":username", $this->username);
         $statement->execute();
@@ -46,8 +48,6 @@ class Login {
             session_start();
             $_SESSION['username'] = $this->username;
             header('location: index.php');
-        } else {
-            echo "No can login!";
         }
     }
 }

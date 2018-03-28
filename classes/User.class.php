@@ -1,5 +1,7 @@
 <?php
 
+include_once ('Db.class.php');
+
 class User {
     private $username;
     private $password;
@@ -40,17 +42,24 @@ class User {
     }
 
     public function Save() {
-        $conn = new PDO('mysql:host=localhost; dbname=inspiration', 'root', 'root');
-        $statement = $conn->prepare("insert into users (username, password) VALUES (:username, :password)");
-        $statement->bindValue(":username", $this->username);
-        $statement->bindValue(":password", $this->password);
-        if($statement->execute()) {
-            session_start();
-            $_SESSION['username'] = $this->username;
-            header('location: index.php');
-        } else {
-            echo "Something went wrong";
-        };
-    }
+        $conn = Db::getInstance();
+        $statementCheck = $conn->prepare("select * from users where username = :username");
+        $statementCheck->bindValue(":username", $this->username);
+        $statementCheck->execute();
 
+        if ($statementCheck->rowCount() < 1) {
+            $statement = $conn->prepare("insert into users (username, password) VALUES (:username, :password)");
+            $statement->bindValue(":username", $this->username);
+            $statement->bindValue(":password", $this->password);
+            if($statement->execute()) {
+                session_start();
+                $_SESSION['username'] = $this->username;
+                header('location: index.php');
+            } else {
+                echo "Something went wrong";
+            }
+        } else {
+            return false;
+        }
+    }
 }
