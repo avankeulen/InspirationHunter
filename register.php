@@ -12,6 +12,9 @@ if (!empty($_POST)) {
         $user->setUsername($username);
         $user->setPassword($password);
         $user->Save();
+        if ($user->Save() == false) {
+            $error = "";
+        }
     }
 }
 
@@ -27,6 +30,9 @@ if (!empty($_POST)) {
 <body>
 
 <form action="" method="post">
+    <?php if (isset($error)): ?>
+        <div>Username already exists.</div>
+    <?php endif; ?>
     <label for="username">Username</label>
     <input type="text" name="username" id="username">
 

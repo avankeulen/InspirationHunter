@@ -1,5 +1,4 @@
 <?php
-include_once ('inc/db.inc.php');
 include_once ('classes/Login.class.php');
 
 if (!empty($_POST)) {
@@ -10,6 +9,9 @@ if (!empty($_POST)) {
     $login->setUsername($username);
     $login->setPassword($password);
     $login->canLogin();
+    if (!$login->canLogin()) {
+        $error = "";
+    }
 
 }
 
@@ -24,7 +26,11 @@ if (!empty($_POST)) {
 </head>
 <body>
 
+
 <form action="" method="post">
+    <?php if (isset($error)): ?>
+        <div class="form_error">Username and Password don't match.</div>
+    <?php endif; ?>
     <label for="username">Username</label>
     <input type="text" name="username" id="username">
 

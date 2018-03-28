@@ -1,6 +1,4 @@
 <?php
-include_once ('inc/db.inc.php');
-
 session_start();
 
 if (!isset($_SESSION['username'])) {
