@@ -1,6 +1,12 @@
 <?php
 include_once ('inc/db.inc.php');
 
+session_start();
+
+if (!isset($_SESSION['username'])) {
+    header('location: login.php');
+}
+
 ?><!doctype html>
 <html lang="en">
 <head>
@@ -11,6 +17,10 @@ include_once ('inc/db.inc.php');
     <title>Document</title>
 </head>
 <body>
+
+<a href="logout.php">Log out.</a>
+
+<h1>Welcome <?php echo $_SESSION['username']; ?></h1>
 
 </body>
 </html>

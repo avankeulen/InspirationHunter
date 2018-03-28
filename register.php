@@ -1,5 +1,19 @@
 <?php
 include_once ('inc/db.inc.php');
+include_once ('classes/User.class.php');
+
+if (!empty($_POST)) {
+    $username = $_POST['username'];
+    $password = $_POST['password'];
+    $passwordConfirm = $_POST['password-confirm'];
+
+    if (!empty($username) && $password == $passwordConfirm) {
+        $user = new User();
+        $user->setUsername($username);
+        $user->setPassword($password);
+        $user->Save();
+    }
+}
 
 ?><!doctype html>
 <html lang="en">
@@ -13,8 +27,8 @@ include_once ('inc/db.inc.php');
 <body>
 
 <form action="" method="post">
-    <label for="email">Email</label>
-    <input type="text" name="email" id="email">
+    <label for="username">Username</label>
+    <input type="text" name="username" id="username">
 
     <label for="password">Password</label>
     <input type="password" name="password" id="password">
