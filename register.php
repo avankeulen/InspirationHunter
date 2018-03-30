@@ -7,14 +7,16 @@ if (!empty($_POST)) {
     $password = $_POST['password'];
     $passwordConfirm = $_POST['password-confirm'];
 
-    if (!empty($username) && $password == $passwordConfirm) {
+    if (!empty($username) && !empty($password) && $password == $passwordConfirm) {
         $user = new User();
         $user->setUsername($username);
         $user->setPassword($password);
         $user->Save();
         if ($user->Save() == false) {
-            $error = "";
+            $error = "Username already exists.";
         }
+    } else {
+        $error = "Please fill in all the fields.";
     }
 }
 
@@ -31,7 +33,7 @@ if (!empty($_POST)) {
 
 <form action="" method="post">
     <?php if (isset($error)): ?>
-        <div>Username already exists.</div>
+        <div><?php echo $error; ?></div>
     <?php endif; ?>
     <label for="username">Username</label>
     <input type="text" name="username" id="username">
