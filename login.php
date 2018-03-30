@@ -1,6 +1,6 @@
 <?php
 include_once ('classes/Login.class.php');
-
+// test
 if (!empty($_POST)) {
     $username = $_POST['username'];
     $password = $_POST['password'];
