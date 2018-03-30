@@ -16,6 +16,12 @@ if (!isset($_SESSION['username'])) {
 </head>
 <body>
 
+<form action="">
+
+    <input type="text">
+
+</form>
+
 <a href="logout.php">Log out.</a>
 
 <h1>Welcome <?php echo $_SESSION['username']; ?></h1>
