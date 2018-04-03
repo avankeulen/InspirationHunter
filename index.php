@@ -13,19 +13,11 @@ if (!isset($_SESSION['username'])) {
 </head>
 <body>
 
-<<<<<<< HEAD
 
-<?php // include_once ('inc/nav.inc.php'); ?>
 
-=======
-<form action="">
+<?php include_once ('inc/nav.inc.php'); ?>
 
-    <input type="text">
 
-</form>
-
-<a href="logout.php">Log out.</a>
->>>>>>> origin/master
 
 <h1>Welcome <?php echo $_SESSION['username']; ?></h1>
 
