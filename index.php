@@ -13,7 +13,9 @@ if (!isset($_SESSION['username'])) {
 </head>
 <body>
 
+
 <?php include_once ('inc/nav.inc.php'); ?>
+
 
 <h1>Welcome <?php echo $_SESSION['username']; ?></h1>
 
