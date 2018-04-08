@@ -84,7 +84,7 @@ class User {
                     "cost" => 12
                 ];
                 $newpasswordhash = password_hash($newpassword, PASSWORD_DEFAULT, $settings);
-                $code = ', password = :newpassword';
+                $code = ", password = '".$newpasswordhash."'";
             }
 
             $conn =  Db::getInstance();
@@ -93,7 +93,7 @@ class User {
             $statement->bindValue(":newusername", $newusername);
             $statement->bindValue(":bio",$bio);
             $statement->bindValue(":user_img",$user_img);
-            $statement->bindValue(":newpassword",$newpasswordhash);
+
             if($statement->execute()){
                return true;
             }else{

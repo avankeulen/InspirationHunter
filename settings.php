@@ -3,16 +3,21 @@ include_once("classes/Db.class.php");
 include_once("classes/User.class.php");
 session_start();
 
+// NOG TIMESTAMP TOEVOEGEN!!
+
 if (!isset($_SESSION['username'])) {
     header('location: login.php');
 }
 if(!empty($_POST)){
+    $fotonaam = $_FILES['profilePicture']['tmp_name'];
+    $foto = file_get_contents($fotonaam);
+    
     $u = new User();
     // $u->Password= $_POST['oldPassword'];
     $username = $_SESSION['username'];
     $newusername = $_POST['username'];
     $bio = $_POST['bio'];
-    $user_img = ""; //$_POST['user_img'];
+    $user_img = $foto;
     $newpassword = "";
     if(!empty($_POST['newPassword'])) {
         $newpassword = $_POST['newPassword'];
@@ -47,25 +52,27 @@ if( $statement->rowCount() > 0){
 
 <body>
 
+<h1> Pas account aan:  </h1>
+
     <section class="login-form-wrap3">
 
-        <form class="password-form" method="POST" action="">
+        <form class="password-form" method="POST" action="" enctype="multipart/form-data">
             <label>username :
                 <input class="textbox" type="text" name="username" value=<?php echo $user['username'] ?> >
-            </label>
+            </label><br />
             <label>Bio :
                 <input class="textbox" type="text" name="bio" value=<?php echo $user['bio'] ?> >
-            </label>
+            </label><br />
 
             <label for="profilePicture">Mijn profielfoto</label>
-            <input type="file" name="profilePicture" id="profilePicture" accept="image/gif, image/jpeg, image/png, image/jpg">
-            <img id="imgPreview" src="<?php echo $user['user_img']; ?>" alt=""/>
-            </label>
+            <input type="file" name="profilePicture" id="profilePicture" accept="image/gif, image/jpeg, image/png, image/jpg"><br />
+            <img id="imgPreview" src="img.php" alt="" style="height: 200px;" />
+            </label><br />
 
-            <label>
+            <label>New password: 
                 <input class="textbox" type="password" name="newPassword" placeholder="New Password">
-            </label>
-            <input class="buttonReset" type="submit" value="Reset">
+            </label><br /><br />
+            <input class="buttonReset" type="submit" value="Pas gegevens aan">
         </form>
     </section> 
 

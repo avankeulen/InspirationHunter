@@ -1,6 +1,7 @@
 <?php
 include_once("classes/Db.class.php");
 include_once("classes/User.class.php");
+include_once("classes/Photo.class.php");
 
 session_start();
 
@@ -9,11 +10,7 @@ if (!isset($_SESSION['username'])) {
 }
 $u = new User();
 $userDetails = $u->getUserDetails();
-    //$u->UserID = $_GET["username"];
-   //$userDetails = $u->getUserDetails();
-   // $p = new Photo();
-   // $p->UserID = $_GET["username"];
-    //$profilePhotos = $p->ShowProfilePhotos();
+
 ?><!DOCTYPE html>
 <html lang="en">
 <head>
@@ -25,23 +22,18 @@ $userDetails = $u->getUserDetails();
 </head>
 <body>
 
-
+<h1> ACCOUNT </h1>
 <section class="login-form-wrap2">
 
-    <img class="profilepic" src="files/profilepics/<?php echo $userDetails['profilpic'] ?>" alt="Profilepic">
+    <img class="profilepic" src="img.php" alt="" style="height: 200px;" alt="Profilepic">
 
     <div class="accountanddiscription">
         <h3 class="accountname"><?php echo $userDetails['username']?></h3>
         <p class="bio">Bio: <?php echo $userDetails['bio'] ?></p>
 
     </div>
-<article class="userPhotos">
-    <?php foreach($profilePhotos as $profilePhoto): ?>
-       <div>
-           <a href="photo.php?postID=<?php echo $profilePhoto['postID']?>"><img src="files/<?php echo $profilePhoto['photo']; ?>" alt=""></a>
-           </div>
-    <?php endforeach; ?>
-</article>
+
+
 </section>
  
 
