@@ -91,4 +91,11 @@ class Upload {
         $statement->execute();
         return true;
     }
+    
+    public function getPosts(){
+        $conn = Db::getInstance();
+        $statement = $conn->prepare("select * from posts");
+        $statement->execute();
+        return $statement;
+    }
 }
