@@ -7,14 +7,24 @@ if (!isset($_SESSION['username'])) {
     header('location: login.php');
 }
 
-<<<<<<< HEAD
-include_once('Db.class.php');
-include_once('db.inc.php');
+//include_once('Db.class.php');
+//include_once('db.inc.php');
 
-=======
 $post = new Upload();
 $posts = $post->getPosts();
->>>>>>> refs/remotes/origin/Feature-6-loading-20posts
+//>>>>>>> refs/remotes/origin/Feature-6-loading-20posts
+
+
+
+    if (!empty($_GET)) {
+        $conn = Db::getInstance();
+        $search = $_GET['search'];
+
+        $stmt = $conn->prepare("SELECT * FROM posts WHERE title LIKE $search");
+        $stmt->execute();
+        $result = $stmt->fetch();
+    }
+
 
 ?><!doctype html>
 <html lang="en">
@@ -27,26 +37,29 @@ $posts = $post->getPosts();
 
 
 <?php include_once ('inc/nav.inc.php'); ?>
-<?php include_once ('search.php'); ?>
+<?php //include_once ('search.php'); ?>
 
 
 <h1>Welcome <?php echo $_SESSION['username']; ?></h1>
 
-<<<<<<< HEAD
+
 <form action="" method="get">
-    <input type="text" name="search">
+    <input type="text" name="search" placeholder="Search">
 </form>
 
 
-<?php foreach( $result as $result ): ?>
+
+<?php foreach( $result as $result): ?>
     <a href="details.php?watch=<?php echo $result['id']; ?>">
-    <?php echo $result["title"];
-    echo $result["description"];?>
+    <?php
+        echo $result["title"];
+        echo $result["description"];
+    ?>
     </a>
 <?php endforeach ?>
 
 
-=======
+
 <?php while($row = $posts->fetch()) : ?>
     <div class="post" data-id="<?php echo $row['id']?>">
         <p><?php echo $row['title'] ?></p>
@@ -57,7 +70,6 @@ $posts = $post->getPosts();
 <button class="show-posts">Show more</button>
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
 <script src="js/script.js"></script>
->>>>>>> refs/remotes/origin/Feature-6-loading-20posts
 
 </body>
 </html>
