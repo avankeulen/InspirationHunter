@@ -91,9 +91,6 @@ class Upload {
         $statement->execute();
         return true;
     }
-<<<<<<< HEAD
-
-=======
     
     public function getPosts(){
         $conn = Db::getInstance();
@@ -101,5 +98,4 @@ class Upload {
         $statement->execute();
         return $statement;
     }
->>>>>>> refs/remotes/origin/Feature-6-loading-20posts
 }
