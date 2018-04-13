@@ -1,5 +1,5 @@
 <?php
-include_once ('inc/db.inc.php');
+include_once ('classes/Db.class.php');
 include_once ('classes/User.class.php');
 
 if (!empty($_POST)) {

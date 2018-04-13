@@ -91,5 +91,15 @@ class Upload {
         $statement->execute();
         return true;
     }
+<<<<<<< HEAD
 
+=======
+    
+    public function getPosts(){
+        $conn = Db::getInstance();
+        $statement = $conn->prepare("select * from posts");
+        $statement->execute();
+        return $statement;
+    }
+>>>>>>> refs/remotes/origin/Feature-6-loading-20posts
 }
