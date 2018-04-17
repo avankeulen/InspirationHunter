@@ -1,29 +1,22 @@
 <?php
-session_start();
-
+include_once ('inc/session_check.inc.php');
 include_once('classes/Upload.class.php');
 
-if (!isset($_SESSION['username'])) {
-    header('location: login.php');
-}
-
-//include_once('Db.class.php');
-//include_once('db.inc.php');
 
 $post = new Upload();
 $posts = $post->getPosts();
-//>>>>>>> refs/remotes/origin/Feature-6-loading-20posts
 
 
+if (!empty($_GET['search'])) {
+    include_once ('classes/Search.class.php');
 
-    if (!empty($_GET)) {
-        $conn = Db::getInstance();
-        $search = $_GET['search'];
+    $search_term = $_GET['search'];
+    $test = new Search();
+    $test->setSearchTerm($search_term);
+    $result = $test->_Search();
+}
 
-        $stmt = $conn->prepare("SELECT * FROM posts WHERE title LIKE $search");
-        $stmt->execute();
-        $result = $stmt->fetch();
-    }
+
 
 
 ?><!doctype html>
@@ -48,15 +41,11 @@ $posts = $post->getPosts();
 </form>
 
 
-
-<?php foreach( $result as $result): ?>
-    <a href="details.php?watch=<?php echo $result['id']; ?>">
-    <?php
-        echo $result["title"];
-        echo $result["description"];
-    ?>
-    </a>
-<?php endforeach ?>
+<?php if (isset($result)): ?>
+    <?php foreach($result as $r): ?>
+        <a href="details.php?watch=<?php echo $r['title']; ?>"> <?php echo $r["title"]; echo $r['description']; ?> </a>
+    <?php endforeach; ?>
+<?php endif; ?>
 
 
 

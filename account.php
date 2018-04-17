@@ -1,13 +1,10 @@
 <?php
+include_once ('inc/session_check.inc.php');
 include_once("classes/Db.class.php");
 include_once("classes/User.class.php");
 include_once("classes/Photo.class.php");
 
-session_start();
 
-if (!isset($_SESSION['username'])) {
-    header('location: login.php');
-}
 $u = new User();
 $userDetails = $u->getUserDetails();
 
