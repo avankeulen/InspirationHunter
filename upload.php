@@ -34,18 +34,21 @@ if (!empty($_POST)){
 
 <?php include_once ('inc/nav.inc.php'); ?>
 
-<form action="" method="post">
-    <h1>Upload Post</h1>
+<section class="content">
+    <form action="" method="post">
+        <h1>Upload Post</h1>
 
-    <?php if (isset($error)): ?>
-        <div><?php echo $error; ?></div>
-    <?php endif; ?>
+        <?php if (isset($error)): ?>
+            <div><?php echo $error; ?></div>
+        <?php endif; ?>
 
-    <input type="text" name="title" placeholder="Title">
-    <input type="file" name="upload_file"  accept="image/*">
-    <input type="text" name="description" placeholder="Description">
-    <input type="submit">
-</form>
+        <input type="text" name="title" placeholder="Title">
+        <input type="file" name="upload_file"  accept="image/*">
+        <input type="text" name="description" placeholder="Description">
+        <input type="submit">
+    </form>
+</section>
+
 
 </body>
 </html>
