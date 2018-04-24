@@ -1,12 +1,11 @@
 <?php
-include_once ('inc/session_check.inc.php');
-include_once("classes/Db.class.php");
-include_once("classes/User.class.php");
-include_once("classes/Photo.class.php");
+    include_once ('inc/session_check.inc.php');
+    include_once ('classes/Db.class.php');
+    include_once ('classes/User.class.php');
+    include_once ('classes/Photo.class.php');
 
-
-$u = new User();
-$userDetails = $u->getUserDetails();
+    $u = new User();
+    $userDetails = $u->getUserDetails();
 
 ?><!DOCTYPE html>
 <html lang="en">
@@ -30,9 +29,8 @@ $userDetails = $u->getUserDetails();
 
     </div>
 
-
 </section>
- 
+
 
 </body>
 </html>

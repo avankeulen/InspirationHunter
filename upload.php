@@ -1,7 +1,6 @@
 <?php
     include_once ('inc/session_check.inc.php');
-    include_once ('classes/Upload.class.php');
-
+    include_once ('classes/Post.class.php');
 
 if (!empty($_POST)){
     $title = $_POST['title'];
@@ -10,7 +9,7 @@ if (!empty($_POST)){
     $user_id = $_SESSION['username'];
 
     if (!empty($image) && !empty($description) && !empty($title)) {
-        $post = new Upload();
+        $post = new Post();
         $post->setImage($image);
         $post->setDescription($description);
         $post->setUserId($user_id);
@@ -36,7 +35,8 @@ if (!empty($_POST)){
 <?php include_once ('inc/nav.inc.php'); ?>
 
 <form action="" method="post">
-    <h1></h1>
+    <h1>Upload Post</h1>
+
     <?php if (isset($error)): ?>
         <div><?php echo $error; ?></div>
     <?php endif; ?>
