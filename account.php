@@ -12,24 +12,30 @@
 <head>
     <meta charset="UTF-8">
     <title>InspirationHunter Profile Page</title>
-    <link rel="stylesheet" href="css/style.css">
+    <?php include_once ('inc/head.inc.php'); ?>    
 
 
 </head>
 <body>
 
-<h1> ACCOUNT </h1>
-<section class="login-form-wrap2">
+<?php include_once ('inc/nav.inc.php'); ?>
 
-    <img class="profilepic" src="img.php" alt="" style="height: 200px;" alt="Profilepic">
+<section class="content">
+    <h1> ACCOUNT </h1>
+    <a href="">Edit</a>
+    <section class="login-form-wrap2">
 
-    <div class="accountanddiscription">
-        <h3 class="accountname"><?php echo $userDetails['username']?></h3>
-        <p class="bio">Bio: <?php echo $userDetails['bio'] ?></p>
+        <img class="profilepic" src="img.php" alt="" style="height: 200px;" alt="Profilepic">
 
-    </div>
+        <div class="accountanddiscription">
+            <h3 class="accountname"><?php echo $userDetails['username']?></h3>
+            <p class="bio">Bio: <?php echo $userDetails['bio'] ?></p>
 
+        </div>
+
+    </section>
 </section>
+
 
 
 </body>

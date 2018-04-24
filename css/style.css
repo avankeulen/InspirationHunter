@@ -25,7 +25,7 @@ header {
     background-color: #E2B8B2;
     height: 45px;
     padding-top: 10px;
-    position: fixed;
+    /*position: fixed;*/
     font-size: 1.3em;
 }
 nav {

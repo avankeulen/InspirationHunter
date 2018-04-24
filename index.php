@@ -23,11 +23,7 @@ if (!empty($_GET['search'])) {
 </head>
 <body>
 
-<header>
-    <section class="content">
-        <?php include_once ('inc/nav.inc.php'); ?>
-    </section>   
-</header>
+<?php include_once ('inc/nav.inc.php'); ?>
 
 
 <section class="content">
