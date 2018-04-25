@@ -7,6 +7,7 @@ class Post {
     private $description;
     private $user_id;
     private $title;
+    private $time;
 
     /**
      * @return mixed
@@ -81,13 +82,22 @@ class Post {
         $this->title = $title;
     }
 
+    /**
+     * @param mixed $time
+     */
+    public function setTime($time)
+    {
+        $this->time = $time;
+    }
+
     public function SavePost() {
         $conn = Db::getInstance();
-        $statement = $conn->prepare("insert into posts (user_id, description, post_img, title) VALUES (:id, :d, :p, :t)");
+        $statement = $conn->prepare("insert into posts (user_id, description, post_img, title, time) VALUES (:id, :d, :p, :t, :ti)");
         $statement->bindValue(":id", $this->getUserId());
         $statement->bindValue(":d", $this->getDescription());
         $statement->bindValue(":p", $this->getImage());
         $statement->bindValue(":t", $this->getTitle());
+        $statement->bindValue(":ti", $this->getTime());
         $statement->execute();
         return true;
     }

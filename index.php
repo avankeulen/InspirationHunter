@@ -42,6 +42,7 @@ if (!empty($_GET['search'])) {
                 <img src="<?php echo 'images/'.$row['post_img'] ?>" alt="post_img" width="50px" height="auto">
                 <h2><?php echo $row['title'] ?></h2>
                 <p><?php echo $row['description'] ?></p>
+                <p><?php echo $row['time'] ?></p>
             </li>
         <?php endwhile; ?>
     </ul>
