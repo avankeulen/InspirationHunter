@@ -90,6 +90,14 @@ class Post {
         $this->time = $time;
     }
 
+    /**
+     * @return mixed
+     */
+    public function getTime()
+    {
+        return $this->title;
+    }
+
     public function SavePost() {
         $conn = Db::getInstance();
         $statement = $conn->prepare("insert into posts (user_id, description, post_img, title, time) VALUES (:id, :d, :p, :t, :ti)");

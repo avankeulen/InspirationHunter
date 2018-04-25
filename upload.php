@@ -6,6 +6,7 @@ if (!empty($_POST)){
     $title = $_POST['title'];
     $image = $_POST['upload_file'];
     $description = $_POST['description'];
+    $time = $_POST['time'];
     $user_id = $_SESSION['username'];
 
     if (!empty($image) && !empty($description) && !empty($title)) {
@@ -14,6 +15,7 @@ if (!empty($_POST)){
         $post->setDescription($description);
         $post->setUserId($user_id);
         $post->setTitle($title);
+        $post->setTime($time);
         if ($post->SavePost()) {
             header('location: index.php');
         } else {
