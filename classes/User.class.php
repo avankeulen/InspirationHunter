@@ -113,4 +113,13 @@ class User {
         $result =  $statement->fetch();
         return $result;
     }
+
+    public function getUserID(){
+        $conn = Db::getInstance();
+        $statement = $conn->prepare("select * from users where username = :username");
+        $statement->bindValue(":username", $_SESSION['username']);
+        $statement->execute();
+        $result =  $statement->fetch();
+        return $result['id'];
+    }
 }

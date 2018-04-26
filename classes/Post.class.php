@@ -110,9 +110,9 @@ class Post {
         return true;
     }
     
-    public function getPosts(){
+    public function getPosts($user_id){
         $conn = Db::getInstance();
-        $statement = $conn->prepare("select * from posts");
+        $statement = $conn->prepare("select * from posts where user_id = '".$user_id."'");
         $statement->execute();
         return $statement;
     }
