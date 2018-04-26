@@ -6,7 +6,8 @@ if (!empty($_POST)){
     $title = $_POST['title'];
     $image = $_POST['upload_file'];
     $description = $_POST['description'];
-    $time = $_POST['time'];
+    $time = "";
+    //$_POST['time'];
     $user_id = $_SESSION['username'];
 
     if (!empty($image) && !empty($description) && !empty($title)) {

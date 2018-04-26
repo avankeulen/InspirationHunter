@@ -3,11 +3,29 @@
     include_once ('classes/Db.class.php');
     include_once ('classes/User.class.php');
     include_once ('classes/Photo.class.php');
+    include_once ('classes/Post.class.php');
+
 
     $u = new User();
     $userDetails = $u->getUserDetails();
 
-?><!DOCTYPE html>
+?>
+<?php
+$u = new User;
+$user_id = $u->getUserID();
+
+if(isset($_POST['delete'])){
+    $id = $_POST['id'];
+    $conn = Db::getInstance();
+        $postDelete = $conn->prepare("delete from posts where id = :id and user_id = :user_id");
+        $postDelete->bindValue(":id", $id);
+        $postDelete->bindValue(":user_id", $user_id);
+        $postDelete->execute();
+
+}
+?>
+
+<!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
@@ -19,6 +37,11 @@
 <body>
 
 <?php include_once ('inc/nav.inc.php'); ?>
+
+<?php
+$post = new Post();
+$posts = $post->getPosts($user_id);
+?>
 
 <section class="content">
     <h1> ACCOUNT </h1>
@@ -32,6 +55,24 @@
             <p class="bio">Bio: <?php echo $userDetails['bio'] ?></p>
 
         </div>
+
+
+<h2> MY POSTS: </h2>
+<ul class="list">
+        <?php while($row = $posts->fetch()) : ?>
+            <li class="post" data-id="<?php echo $row['id']?>">
+            <form action="" method="post">
+            <img src="<?php echo 'images/'.$row['post_img'] ?>" alt="post_img" width="50px" height="auto">
+                <h2><?php echo $row['title'] ?></h2>
+                <p><?php echo $row['description'] ?></p>
+                <p><?php echo $row['time'] ?></p>
+                <input type="hidden" name="id" value="<?php echo $row['id']?>" />
+                <input type="submit" name="delete" value="Delete" />
+                </form>
+            </li>
+        <?php endwhile; ?>
+    </ul>
+
 
     </section>
 </section>

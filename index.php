@@ -1,9 +1,15 @@
 <?php
 include_once ('inc/session_check.inc.php');
 include_once ('classes/Post.class.php');
+include_once ('classes/User.class.php');
+include_once ('classes/Follow.class.php');
 
+$u = new User;
+$user_id = $u->getUserID();
+$f = new Follow();
+$followUserID = $f->getfollowUserID($user_id);
 $post = new Post();
-$posts = $post->getPosts();
+$posts = $post->getPosts($followUserID);
 
 
 // SEARCH
