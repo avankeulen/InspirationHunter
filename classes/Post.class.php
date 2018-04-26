@@ -87,6 +87,8 @@ class Post {
      */
     public function setTime($time)
     {
+        date_default_timezone_set('Europe/Paris');
+        $time = date("Y-m-d H:i:s");
         $this->time = $time;
     }
 
@@ -95,7 +97,7 @@ class Post {
      */
     public function getTime()
     {
-        return $this->title;
+        return $this->time;
     }
 
     public function SavePost() {
