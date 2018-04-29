@@ -4,11 +4,13 @@
 
 if (!empty($_POST)){
     $title = $_POST['title'];
-    $image = $_POST['upload_file'];
+    $image = $_FILES['upload_file']['name'];
     $description = $_POST['description'];
     $time = "";
     //$_POST['time'];
     $user_id = $_SESSION['username'];
+
+
 
     if (!empty($image) && !empty($description) && !empty($title)) {
         $post = new Post();
@@ -17,10 +19,20 @@ if (!empty($_POST)){
         $post->setUserId($user_id);
         $post->setTitle($title);
         $post->setTime($time);
+
+        define ('SITE_ROOT', realpath(dirname(__FILE__)));
+
         if ($post->SavePost()) {
+
+            $filetmp = $_FILES["upload_file"]["tmp_name"];
+            $filename = $image;
+            $filepath = "/images/uploads/".$filename;
+            move_uploaded_file($filetmp,SITE_ROOT.$filepath);
+
             header('location: index.php');
+
         } else {
-            echo "Something went wrong";
+            $error = "Something went wrong";
         }
     } else {
         $error = "Leave no empty fields!";
@@ -38,7 +50,7 @@ if (!empty($_POST)){
 <?php include_once ('inc/nav.inc.php'); ?>
 
 <section class="content">
-    <form action="" method="post">
+    <form action="" method="post" enctype="multipart/form-data">
         <h1>Upload Post</h1>
 
         <?php if (isset($error)): ?>
@@ -48,7 +60,7 @@ if (!empty($_POST)){
         <input type="text" name="title" placeholder="Title">
         <input type="file" name="upload_file"  accept="image/*">
         <input type="text" name="description" placeholder="Description">
-        <input type="submit">
+        <input type="submit" name="submit">
     </form>
 </section>
 

@@ -102,14 +102,23 @@ class Post {
 
     public function SavePost() {
         $conn = Db::getInstance();
-        $statement = $conn->prepare("insert into posts (user_id, description, post_img, title, time) VALUES (:id, :d, :p, :t, :ti)");
+        $statement = $conn->prepare("insert into posts (user_id, description, post_img, title, time_set) VALUES (:id, :d, :p, :t, :ti)");
         $statement->bindValue(":id", $this->getUserId());
         $statement->bindValue(":d", $this->getDescription());
         $statement->bindValue(":p", $this->getImage());
         $statement->bindValue(":t", $this->getTitle());
         $statement->bindValue(":ti", $this->getTime());
-        $statement->execute();
-        return true;
+
+        if ($statement->execute()){
+            return true;
+        } else {
+            return false;
+        }
+
+    }
+
+    public function MoveImage(){
+
     }
     
     public function getPosts($user_id){
