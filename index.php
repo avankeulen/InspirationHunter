@@ -1,9 +1,17 @@
 <?php
 include_once ('inc/session_check.inc.php');
 include_once ('classes/Post.class.php');
+include_once ('classes/User.class.php');
+include_once ('classes/Follow.class.php');
+
+$u = new User;
+$user_id = $u->getUserID();
+
+$f = new Follow();
+$followUserID = $f->getfollowUserID($user_id);
 
 $post = new Post();
-$posts = $post->getPosts();
+$posts = $post->getPosts($followUserID);
 
 
 // SEARCH
@@ -39,10 +47,10 @@ if (!empty($_GET['search'])) {
     <ul class="list">
         <?php while($row = $posts->fetch()) : ?>
             <li class="post" data-id="<?php echo $row['id']?>">
-                <img src="<?php echo 'images/'.$row['post_img'] ?>" alt="post_img" width="50px" height="auto">
-                <h2><?php echo $row['title'] ?></h2>
-                <p><?php echo $row['description'] ?></p>
-                <p><?php echo $row['time'] ?></p>
+                <img src="<?php echo 'images/uploads/'.$row['post_img']; ?>" alt="post_img" width="50px" height="auto">
+                <h2><?php echo $row['title']; ?></h2>
+                <p><?php echo $row['description']; ?></p>
+                <p><?php echo $row['time']; ?></p>
             </li>
         <?php endwhile; ?>
     </ul>
