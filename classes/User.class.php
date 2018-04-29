@@ -122,4 +122,13 @@ class User {
         $result =  $statement->fetch();
         return $result['id'];
     }
+
+    public function getAccountDetails($user_id){
+        $conn = Db::getInstance();
+        $statement = $conn->prepare("select * from users where id = :user_id");
+        $statement->bindValue(":user_id", $user_id);
+        $statement->execute();
+        $result =  $statement->fetch();
+        return $result;
+    }
 }

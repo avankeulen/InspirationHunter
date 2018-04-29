@@ -6,8 +6,11 @@
     include_once ('classes/Post.class.php');
 
 
-    $u = new User();
-    $userDetails = $u->getUserDetails();
+//    $u = new User();
+//    $userDetails = $u->getUserDetails();
+
+
+// ANDER ACCOUNT KRIJGEN http://localhost:8888/project/InspirationHunter/account.php?userID=16
 
 ?>
 <?php
@@ -38,17 +41,29 @@ if(isset($_POST['delete'])){
 
 <?php include_once ('inc/nav.inc.php'); ?>
 
-<?php
-$post = new Post();
-$posts = $post->getPosts($user_id);
-?>
-
 <section class="content">
     <h1> ACCOUNT </h1>
+    <?php
+    $g_userID = $user_id;
+    if(isset($_GET['userID'])){
+        $g_userID = htmlspecialchars($_GET["userID"]);
+    }
+    
+    $userDetails = $u->getAccountDetails($g_userID);
+
+$post = new Post();
+$posts = $post->getPosts($g_userID);
+?>
     <a href="">Edit</a>
+    <?php
+    if($g_userID != $user_id){ ?>
+        <a id="btnFollow" href="javascript: followUser();"></a><?php
+    }
+    ?>
+
     <section class="login-form-wrap2">
 
-        <img class="profilepic" src="img.php" alt="" style="height: 200px;" alt="Profilepic">
+        <img class="profilepic" src="img.php?id=<?php echo $g_userID; ?>" alt="" style="height: 200px;" alt="Profilepic">
 
         <div class="accountanddiscription">
             <h3 class="accountname"><?php echo $userDetails['username']?></h3>
@@ -77,7 +92,39 @@ $posts = $post->getPosts($user_id);
     </section>
 </section>
 
+<script   src="https://code.jquery.com/jquery-3.3.1.min.js"   integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8="   crossorigin="anonymous"></script>
 
+<script>
+    function getFollowStatus(followUserID) {
+        $.ajax({
+            type: "POST",
+            url: "http://localhost:8888/project/InspirationHunter/ajax/ajax_getFollowStatus.php",
+            data: {"followUserID"  : followUserID},
+            success: function(data){
+                document.getElementById("btnFollow").innerHTML = data;
+            }
+        }); 
+    }
+
+    function followUser(){
+        var followUserID = (<?php echo $g_userID; ?>);
+
+        $.ajax({
+            type: "POST",
+            url: "http://localhost:8888/project/InspirationHunter/ajax/ajax_followuser.php",
+            data: {"followUserID"  : followUserID},
+            success: function(data){
+                if(data != "ok"){
+                    alert(data);
+                }
+                getFollowStatus(followUserID);
+            }
+        }); 
+
+    }
+    getFollowStatus(<?php echo $g_userID; ?>);
+</script>
+<script src="js/app.js"></script>
 
 </body>
 </html>

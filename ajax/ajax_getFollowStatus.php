@@ -6,6 +6,6 @@
     $followUserID = $_POST['followUserID'];
     
     $f = new Follow;
-    echo $f->followUser($followUserID);
+    echo $f->getFollowStatus($followUserID);
     
 ?>
