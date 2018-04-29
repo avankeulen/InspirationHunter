@@ -1,20 +1,22 @@
 <?php
     include_once ('inc/session_check.inc.php');
-    include_once ('classes/Upload.class.php');
-
+    include_once ('classes/Post.class.php');
 
 if (!empty($_POST)){
     $title = $_POST['title'];
     $image = $_POST['upload_file'];
     $description = $_POST['description'];
+    $time = "";
+    //$_POST['time'];
     $user_id = $_SESSION['username'];
 
     if (!empty($image) && !empty($description) && !empty($title)) {
-        $post = new Upload();
+        $post = new Post();
         $post->setImage($image);
         $post->setDescription($description);
         $post->setUserId($user_id);
         $post->setTitle($title);
+        $post->setTime($time);
         if ($post->SavePost()) {
             header('location: index.php');
         } else {
@@ -35,17 +37,21 @@ if (!empty($_POST)){
 
 <?php include_once ('inc/nav.inc.php'); ?>
 
-<form action="" method="post">
-    <h1></h1>
-    <?php if (isset($error)): ?>
-        <div><?php echo $error; ?></div>
-    <?php endif; ?>
+<section class="content">
+    <form action="" method="post">
+        <h1>Upload Post</h1>
 
-    <input type="text" name="title" placeholder="Title">
-    <input type="file" name="upload_file"  accept="image/*">
-    <input type="text" name="description" placeholder="Description">
-    <input type="submit">
-</form>
+        <?php if (isset($error)): ?>
+            <div><?php echo $error; ?></div>
+        <?php endif; ?>
+
+        <input type="text" name="title" placeholder="Title">
+        <input type="file" name="upload_file"  accept="image/*">
+        <input type="text" name="description" placeholder="Description">
+        <input type="submit">
+    </form>
+</section>
+
 
 </body>
 </html>

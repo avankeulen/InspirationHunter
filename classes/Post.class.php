@@ -2,11 +2,12 @@
 
 include_once ('Db.class.php');
 
-class Upload {
+class Post {
     private $image;
     private $description;
     private $user_id;
     private $title;
+    private $time;
 
     /**
      * @return mixed
@@ -81,14 +82,40 @@ class Upload {
         $this->title = $title;
     }
 
+    /**
+     * @param mixed $time
+     */
+    public function setTime($time)
+    {
+        date_default_timezone_set('Europe/Paris');
+        $time = date("Y-m-d H:i:s");
+        $this->time = $time;
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getTime()
+    {
+        return $this->time;
+    }
+
     public function SavePost() {
         $conn = Db::getInstance();
-        $statement = $conn->prepare("insert into posts (user_id, description, post_img, title) VALUES (:id, :d, :p, :t)");
+        $statement = $conn->prepare("insert into posts (user_id, description, post_img, title, time) VALUES (:id, :d, :p, :t, :ti)");
         $statement->bindValue(":id", $this->getUserId());
         $statement->bindValue(":d", $this->getDescription());
         $statement->bindValue(":p", $this->getImage());
         $statement->bindValue(":t", $this->getTitle());
+        $statement->bindValue(":ti", $this->getTime());
         $statement->execute();
         return true;
+    }
+    
+    public function getPosts($user_id){
+        $conn = Db::getInstance();
+        $statement = $conn->prepare("select * from posts where user_id = '".$user_id."'");
+        $statement->execute();
+        return $statement;
     }
 }

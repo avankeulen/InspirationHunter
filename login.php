@@ -18,29 +18,37 @@ if (!empty($_POST)) {
 ?><!doctype html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport"
-          content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
-    <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <title>Document</title>
+    <title>Login - Inspiration Hunter</title>
+    <?php include_once ('inc/head.inc.php'); ?>
+    <link rel="stylesheet" href="css/logreg.css">
 </head>
 <body>
 
 
-<form action="" method="post">
+<form action="" method="post" id="logreg_form">
+    <img src="images/logotext.svg" alt="">
+    <h1>Login</h1>
+    <br>
     <?php if (isset($error)): ?>
         <div class="form_error">Username and Password don't match.</div>
     <?php endif; ?>
     <label for="username">Username</label>
+    <br>
     <input type="text" name="username" id="username">
+    <br>
 
     <label for="password">Password</label>
+    <br>
     <input type="password" name="password" id="password">
+    <br>
 
     <input type="submit" value="Login">
+    <br>
+    
+    <a href="register.php">No account yet? Create account.</a>
 </form>
 
-<a href="register.php">Create account.</a>
+
 
 </body>
 </html>
