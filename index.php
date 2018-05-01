@@ -8,6 +8,7 @@ include_once ('classes/Flag.class.php');
 
 $u = new User;
 $user_id = $u->getUserID();
+$_SESSION['user_id'] = $user_id;
 
 $f = new Follow();
 $followUserID = $f->getfollowUserID($user_id);
@@ -89,18 +90,18 @@ if (!empty($_POST['flag'])) {
 
                 <form action="" method="post">
                     <label for="comment<?php echo $row['id'];?>">Comment:</label>
-                    <input type="text" name="comment" id="comment<?php echo $row['id'];?>">
+                    <input type="text" name="comment" id="comment<?php echo $row['id'];?>" class="comment-text">
                     <input type="hidden" name="post_id" value="<?= $row['id']; ?>">
-                    <input type="submit" value="Send">
+                    <input type="submit" value="Send" id="btn-comment">
                 </form>
 
-                <ul>
+                <ul class="comment-ul">
 
                     <?php foreach ($allComments as $c): ?>
                     <?php if ($c['post_id'] == $row['id']): ?>
-                        <li>
+                        <li class="comment-li">
                             <strong><?php echo $c['username']; ?> </strong>
-                            <?php echo $c['comment']; ?>
+                            <p><?php echo $c['comment']; ?></p>
                         </li>
                     <?php endif; ?>
                     <?php endforeach; ?>
