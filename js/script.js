@@ -21,4 +21,29 @@ $(document).ready(function(){
         })
         j=0;
     })
-})
+});
+
+$('#btn-comment').on("click", function (e) {
+    var text = $('.comment-text').val();
+    var user = $('#welcome strong').val();
+
+    $.ajax({
+        method: "POST",
+        url: "ajax/ajax_comment.php",
+        data: { text: text, user: user }
+    })
+        .done(function( res ) {
+            if (res.status == "success") {
+                var comment = `<li class="comment-li" style="display: none;">
+                                <strong>${res.user}</strong>
+                                <p> ${res.text}</p>
+                            </li>`;
+
+                $(".comment-ul").prepend(comment);
+                $(".comment-li").first().slideDown();
+            }
+
+        });
+
+    e.preventDefault();
+});
