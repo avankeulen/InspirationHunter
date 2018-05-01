@@ -78,21 +78,23 @@ if (!empty($_POST['flag'])) {
                 <form action="" method="post" id="flag">
                     <a href="#">
                         <input type="hidden" value="<?php echo $row['id'];?>" name="flag">
-                        <input type="submit" value="Flag">
+                        <input type="submit" value="Flag" id="flag-btn">
                     </a>
                 </form>
                 <p>This post has been flagged: <?php echo $row['flag']; ?> time<?php if ($row['flag'] != 1): ?>s<?php endif; ?></p>
 
-                <img src="<?php echo 'images/uploads/'.$row['post_img']; ?>" alt="post_img" width="50px" height="auto">
+                <div id="img-div">
+                    <img src="<?php echo 'images/uploads/'.$row['post_img']; ?>" alt="post_img" width="50px" height="auto">
+                </div>
                 <h2><?php echo $row['title']; ?></h2>
                 <p><?php echo $row['description']; ?></p>
                 <p><?php echo $row['time_set']; ?></p>
 
                 <form action="" method="post">
-                    <label for="comment<?php echo $row['id'];?>">Comment:</label>
-                    <input type="text" name="comment" id="comment<?php echo $row['id'];?>" class="comment-text">
+                    <label for="comment<?php echo $row['id'];?>"></label>
+                    <input type="text" name="comment" id="comment<?php echo $row['id'];?>" class="comment-text" placeholder="typ comment...">
                     <input type="hidden" name="post_id" value="<?= $row['id']; ?>">
-                    <input type="submit" value="Send" id="btn-comment">
+                    <input type="submit" value="COMMENT" id="btn-comment">
                 </form>
 
                 <ul class="comment-ul">
