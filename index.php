@@ -84,7 +84,7 @@ $allComments = $comment->GetComments();
                     <?php foreach ($allComments as $c): ?>
                     <?php if ($c['post_id'] == $row['id']): ?>
                         <li>
-                            <strong><?php echo $c['username']; ?>:</strong>
+                            <strong><?php echo $c['username']; ?> </strong>
                             <?php echo $c['comment']; ?>
                         </li>
                     <?php endif; ?>
