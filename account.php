@@ -45,7 +45,7 @@ $posts = $post->getPosts($user_id);
 
 <section class="content">
     <h1> ACCOUNT </h1>
-    <a href="">Edit</a>
+    <a href="settings.php">Edit</a>
     <section class="login-form-wrap2">
 
         <img class="profilepic" src="img.php" alt="" style="height: 200px;" alt="Profilepic">
