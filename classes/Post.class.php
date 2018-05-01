@@ -9,17 +9,10 @@ class Post {
     private $title;
     private $time;
 
-    /**
-     * @return mixed
-     */
     public function getImage()
     {
         return $this->image;
     }
-
-    /**
-     * @param mixed $image
-     */
     public function setImage($image)
     {
         // Image crop! werkt nog niet...
@@ -29,33 +22,21 @@ class Post {
         $this->image = $image;
     }
 
-    /**
-     * @return mixed
-     */
+
     public function getDescription()
     {
         return $this->description;
     }
-
-    /**
-     * @param mixed $description
-     */
     public function setDescription($description)
     {
         $this->description = $description;
     }
 
-    /**
-     * @return mixed
-     */
+
     public function getUserId()
     {
         return $this->user_id;
     }
-
-    /**
-     * @param mixed $user_id
-     */
     public function setUserId($user_id)
     {
         $conn = Db::getInstance();
@@ -66,35 +47,22 @@ class Post {
         $this->user_id = $user_id;
     }
 
-    /**
-     * @return mixed
-     */
+
     public function getTitle()
     {
         return $this->title;
     }
-
-    /**
-     * @param mixed $title
-     */
     public function setTitle($title)
     {
         $this->title = $title;
     }
 
-    /**
-     * @param mixed $time
-     */
     public function setTime($time)
     {
         date_default_timezone_set('Europe/Paris');
         $time = date("Y-m-d H:i:s");
         $this->time = $time;
     }
-
-    /**
-     * @return mixed
-     */
     public function getTime()
     {
         return $this->time;
@@ -123,4 +91,7 @@ class Post {
         $statement->execute();
         return $statement;
     }
+
+
+
 }

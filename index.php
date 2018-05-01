@@ -4,6 +4,7 @@ include_once ('classes/Post.class.php');
 include_once ('classes/User.class.php');
 include_once ('classes/Follow.class.php');
 include_once ('classes/Comment.class.php');
+include_once ('classes/Flag.class.php');
 
 $u = new User;
 $user_id = $u->getUserID();
@@ -24,10 +25,8 @@ if (!empty($_GET['search'])) {
     $result = $test->_Search();
 }
 
-
-
 // Place a comment in PHP
-if (!empty($_POST)){
+if (!empty($_POST['comment'])){
     $comment = $_POST['comment'];
     $post_id = $_POST['post_id'];
 
@@ -41,6 +40,11 @@ if (!empty($_POST)){
 $comment = new Comment();
 $allComments = $comment->GetComments();
 
+if (!empty($_POST['flag'])) {
+    $flag = new Flag();
+    $flag->setPostId($_POST['flag']);
+    $flag->flag_post();
+}
 
 
 ?><!doctype html>
@@ -63,10 +67,21 @@ $allComments = $comment->GetComments();
         <?php endforeach; ?>
     <?php endif; ?>
 
-
+    <?php if (!isset($result)): ?>
     <ul class="list">
         <?php while($row = $posts->fetch()) : ?>
+            <?php if ($row['flag'] < 3): ?>
+
             <li class="post" data-id="<?php echo $row['id'];?>" value="<?php echo $row['id'];?>">
+
+                <form action="" method="post" id="flag">
+                    <a href="#">
+                        <input type="hidden" value="<?php echo $row['id'];?>" name="flag">
+                        <input type="submit" value="Flag">
+                    </a>
+                </form>
+                <p>This post has been flagged: <?php echo $row['flag']; ?> time<?php if ($row['flag'] != 1): ?>s<?php endif; ?></p>
+
                 <img src="<?php echo 'images/uploads/'.$row['post_img']; ?>" alt="post_img" width="50px" height="auto">
                 <h2><?php echo $row['title']; ?></h2>
                 <p><?php echo $row['description']; ?></p>
@@ -84,7 +99,7 @@ $allComments = $comment->GetComments();
                     <?php foreach ($allComments as $c): ?>
                     <?php if ($c['post_id'] == $row['id']): ?>
                         <li>
-                            <strong><?php echo $c['username']; ?>:</strong>
+                            <strong><?php echo $c['username']; ?> </strong>
                             <?php echo $c['comment']; ?>
                         </li>
                     <?php endif; ?>
@@ -92,10 +107,13 @@ $allComments = $comment->GetComments();
                 </ul>
 
             </li>
+
+            <?php endif; ?>
         <?php endwhile; ?>
     </ul>
     
     <button class="show-posts">Show more</button>
+    <?php endif; ?>
     
 </section>
 
