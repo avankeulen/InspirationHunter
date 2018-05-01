@@ -40,8 +40,9 @@ class Comment {
 
     public function PlaceComment() {
         $conn = Db::getInstance();
-        $statement = $conn->prepare("insert into comments (user_id, post_id, comment) values (:u, :p,:c );");
+        $statement = $conn->prepare("insert into comments (user_id, username, post_id, comment) values (:u, :un, :p,:c );");
         $statement->bindValue(':u', $this->getUserId());
+        $statement->bindValue(':un', $_SESSION['username']);
         $statement->bindValue(':p', $this->getPostId());
         $statement->bindValue(':c', $this->getComment());
         $statement->execute();
