@@ -116,10 +116,6 @@ class Post {
         }
 
     }
-
-    public function MoveImage(){
-
-    }
     
     public function getPosts($user_id){
         $conn = Db::getInstance();
