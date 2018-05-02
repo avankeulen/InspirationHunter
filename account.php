@@ -43,6 +43,7 @@ if(isset($_POST['delete'])){
 
 <section class="content">
     <h1> ACCOUNT </h1>
+
     <?php
     $g_userID = $user_id;
     if(isset($_GET['userID'])){
@@ -60,6 +61,9 @@ $posts = $post->getPosts($g_userID);
         <a id="btnFollow" href="javascript: followUser();"></a><?php
     }
     ?>
+
+
+    <a href="settings.php">Edit</a>
 
     <section class="login-form-wrap2">
 
