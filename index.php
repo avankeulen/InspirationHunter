@@ -41,6 +41,7 @@ if (!empty($_POST['comment'])){
 // Loop comments in PHP
 $comment = new Comment();
 $allComments = $comment->GetComments();
+rsort($allComments);
 
 if (!empty($_POST['flag'])) {
     $flag = new Flag();
