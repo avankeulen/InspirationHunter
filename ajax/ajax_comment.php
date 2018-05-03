@@ -23,7 +23,7 @@ try
 }
 catch(Exception $e)
 {
-
+    die("Oops... Something went wrong there");
 }
 
 header('Content-Type: application/json');

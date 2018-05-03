@@ -51,3 +51,33 @@ $('.btn-comment').on("click", function (e) {
     });
     e.preventDefault();
 });
+
+$('.flag-btn').on("click", function (e) {
+    var post_id = $(this).data('id');
+    var element = $(this);
+    var flagcount = parseInt(element.closest('li.post').find(".flag-count").text());
+
+
+    $.ajax({
+        method: "POST",
+        url: "./ajax/ajax_flag.php",
+        data: { post_id: post_id }
+    })
+        .done(function( res ) {
+            if (res.status == "flagged") {
+                var newValue = flagcount + 1;
+                element.closest('li.post').find(".flag-count").text(newValue);
+
+                if (flagcount > 2) {
+                    element.closest('li.post').hide();
+                }
+
+            } else {
+
+            }
+            });
+
+    e.preventDefault();
+});
+
+//update posts set flag = 0
