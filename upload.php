@@ -56,10 +56,17 @@ if (!empty($_POST)){
         <?php if (isset($error)): ?>
             <div><?php echo $error; ?></div>
         <?php endif; ?>
-
-        <input type="text" name="title" placeholder="Title">
-        <input type="file" name="upload_file"  accept="image/*">
-        <input type="text" name="description" placeholder="Description">
+        
+        <label for="upload-title">Title</label>
+        <input type="text" name="title" placeholder="Title" id="upload-title">
+        <br>
+        
+        <label for="upload-file">Image</label>
+        <input type="file" name="upload_file"  accept="image/*" id="upload-file">
+        <br>
+        
+        <label for="upload-desc">Description</label>
+        <input type="text" name="description" placeholder="Description" id="upload-desc">
         <input type="submit" name="submit">
     </form>
 </section>

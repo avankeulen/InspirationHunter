@@ -23,27 +23,31 @@ $(document).ready(function(){
     })
 });
 
-$('#btn-comment').on("click", function (e) {
-    var text = $('.comment-text').val();
-    var user = $('#welcome strong').val();
+// COMMENT WITH AJAX
+$('.btn-comment').on("click", function (e) {
+    var post_id = $(this).data('id');
+    var element = $(this);
+    var text = element.closest('li.post').find('.comment-text').val();
+    var user = $('.username').text();
 
     $.ajax({
         method: "POST",
-        url: "ajax/ajax_comment.php",
-        data: { text: text, user: user }
+        url: "./ajax/ajax_comment.php",
+        data: { text: text, user: user, post_id: post_id }
     })
-        .done(function( res ) {
-            if (res.status == "success") {
-                var comment = `<li class="comment-li" style="display: none;">
-                                <strong>${res.user}</strong>
-                                <p> ${res.text}</p>
-                            </li>`;
+    .done(function( res ) {
+        if (res.status == "success") {
+            var comment = `<li class="comment-li" >
+                            <strong> ${res.user} </strong>
+                            <p> ${res.text} </p>
+                          </li>`;
 
-                $(".comment-ul").prepend(comment);
-                $(".comment-li").first().slideDown();
-            }
+            element.closest('li.post').find(".comment-ul").prepend(comment);
+            element.closest('li.post').find(".comment-li").first().slideDown();
+            $('.comment-text').val("");
 
-        });
+        }
 
+    });
     e.preventDefault();
 });
