@@ -15,6 +15,9 @@ $followUserID = $f->getfollowUserID($user_id);
 $post = new Post();
 $posts = $post->getPosts($followUserID);
 
+$getUsername = new Post();
+$username = $getUsername->postUsername();
+
 
 // SEARCH
 if (!empty($_GET['search'])) {
@@ -76,6 +79,15 @@ if (!empty($_POST['flag'])) {
 
             <li class="post" data-id="<?php echo $row['id'];?>" value="<?php echo $row['id'];?>">
 
+                <a href="\#">
+                    <?php foreach ($username as $u): ?>
+                    <?php if ($row['user_id'] == $u['id']):?>
+                    <div><?php echo $u['user_img']; ?></div>
+                    <h3><?php echo $u['username']; ?></h3>
+                    <?php endif; ?>
+                    <?php endforeach; ?>
+                </a>
+
                 <form action="" method="post" id="flag">
                     <a href="#">
                         <input type="hidden" value="<?php echo $row['id'];?>" name="flag">
@@ -84,16 +96,18 @@ if (!empty($_POST['flag'])) {
                 </form>
                 <p>This post has been flagged: <strong class="flag-count"><?php echo $row['flag']; ?></strong> time<?php if ($row['flag'] != 1): ?><span class="s">s</span><?php endif; ?></p>
 
+                <p id="time-set"><?php echo $row['time_set']; ?></p>
+
                 <div id="img-div">
                     <img src="<?php echo 'images/uploads/'.$row['post_img']; ?>" alt="post_img" width="50px" height="auto">
                 </div>
                 <h2><?php echo $row['title']; ?></h2>
                 <p><?php echo $row['description']; ?></p>
-                <p><?php echo $row['time_set']; ?></p>
 
-                <form action="" method="post">
+
+                <form action="" method="post" class="comment-form">
                     <label for="comment<?php echo $row['id'];?>"></label>
-                    <input type="text" name="comment" id="comment<?php echo $row['id'];?>" class="comment-text" placeholder="type comment...">
+                    <input type="text" name="comment" id="comment<?php echo $row['id'];?>" class="comment-text" placeholder="Leave a comment...">
                     <input type="hidden" name="post_id" value="<?php echo $row['id']; ?>" class="id_post">
                     <input type="submit" value="COMMENT" class="btn-comment" data-id="<?php echo $row['id'];?>">
                 </form>
