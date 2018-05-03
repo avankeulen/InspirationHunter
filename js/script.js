@@ -23,27 +23,67 @@ $(document).ready(function(){
     })
 });
 
-$('#btn-comment').on("click", function (e) {
-    var text = $('.comment-text').val();
-    var user = $('#welcome strong').val();
+// COMMENT WITH AJAX
+$('.btn-comment').on("click", function (e) {
+    var post_id = $(this).data('id');
+    var element = $(this);
+    var text = element.closest('li.post').find('.comment-text').val();
+    var user = $('.username').text();
 
     $.ajax({
         method: "POST",
-        url: "ajax/ajax_comment.php",
-        data: { text: text, user: user }
+        url: "./ajax/ajax_comment.php",
+        data: { text: text, user: user, post_id: post_id }
+    })
+    .done(function( res ) {
+        if (res.status == "success") {
+            var comment = `<li class="comment-li" >
+                            <strong> ${res.user} </strong>
+                            <p> ${res.text} </p>
+                          </li>`;
+
+            element.closest('li.post').find(".comment-ul").prepend(comment);
+            element.closest('li.post').find(".comment-li").first().slideDown();
+            $('.comment-text').val("");
+
+        }
+
+    });
+    e.preventDefault();
+});
+
+$('.flag-btn').on("click", function (e) {
+    var post_id = $(this).data('id');
+    var element = $(this);
+    var flagcount = parseInt(element.closest('li.post').find(".flag-count").text());
+
+
+    $.ajax({
+        method: "POST",
+        url: "./ajax/ajax_flag.php",
+        data: { post_id: post_id }
     })
         .done(function( res ) {
-            if (res.status == "success") {
-                var comment = `<li class="comment-li" style="display: none;">
-                                <strong>${res.user}</strong>
-                                <p> ${res.text}</p>
-                            </li>`;
+            if (res.status == "flagged") {
+                var newValue = flagcount + 1;
+                element.closest('li.post').find(".flag-count").text(newValue);
 
-                $(".comment-ul").prepend(comment);
-                $(".comment-li").first().slideDown();
+                if (newValue > 2) {
+                    element.closest('li.post').hide();
+                }
+                
+                if (newValue == 1) {
+                    element.closest('li.post').find('span').hide();
+                } else {
+                    element.closest('li.post').find('span').show();
+                }
+
+            } else {
+
             }
-
-        });
+            });
 
     e.preventDefault();
 });
+
+//update posts set flag = 0
