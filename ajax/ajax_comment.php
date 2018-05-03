@@ -1,19 +1,24 @@
 <?php
 
+include_once ('../inc/session_check.inc.php');
 include_once ('../classes/Comment.class.php');
 
-$comment = new Comment();
+$c = new Comment();
 
 try
 {
-    $comment->setComment($_POST['comment-text']);
-    $comment->setPostId($row['id']);
-    $comment->setUserId($_SESSION['user_id']);
-    $comment->PlaceComment();
+
+    $c->setUserId($_SESSION['user_id']);
+    $c->setPostId($_POST['post_id']);
+    $c->setComment($_POST['text']);
+    $c->setUsername($_SESSION['username']);
+    $c->PlaceComment();
 
     $feedback = [
         'status'    => 'success',
-        'text'      => htmlspecialchars($comment->getComment())
+        'text'      => htmlspecialchars($c->getComment()),
+        'post_id'   => htmlspecialchars($c->getPostId()),
+        'user'      => htmlspecialchars($c->getUsername())
     ];
 }
 catch(Exception $e)
@@ -23,5 +28,3 @@ catch(Exception $e)
 
 header('Content-Type: application/json');
 echo json_encode($feedback);
-
-?>

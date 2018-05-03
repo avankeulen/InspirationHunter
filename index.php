@@ -34,6 +34,7 @@ if (!empty($_POST['comment'])){
     $c = new Comment();
     $c->setUserId($user_id);
     $c->setPostId($post_id);
+    $c->setUsername($_SESSION['username']);
     $c->setComment($comment);
     $c->PlaceComment();
 }
@@ -60,7 +61,7 @@ if (!empty($_POST['flag'])) {
 
 
 <section class="content">
-    <h1 id="welcome">Welcome <strong><?php echo $_SESSION['username']; ?></strong></h1>
+    <h1 id="welcome">Welcome <strong class="username"><?php echo $_SESSION['username']; ?></strong></h1>
 
     <?php if (isset($result)): ?>
         <?php foreach($result as $r): ?>
@@ -92,20 +93,19 @@ if (!empty($_POST['flag'])) {
 
                 <form action="" method="post">
                     <label for="comment<?php echo $row['id'];?>"></label>
-                    <input type="text" name="comment" id="comment<?php echo $row['id'];?>" class="comment-text" placeholder="typ comment...">
-                    <input type="hidden" name="post_id" value="<?= $row['id']; ?>">
-                    <input type="submit" value="COMMENT" id="btn-comment">
+                    <input type="text" name="comment" id="comment<?php echo $row['id'];?>" class="comment-text" placeholder="type comment...">
+                    <input type="hidden" name="post_id" value="<?php echo $row['id']; ?>" class="id_post">
+                    <input type="submit" value="COMMENT" class="btn-comment" data-id="<?php echo $row['id'];?>">
                 </form>
 
-                <ul class="comment-ul">
-
+                <ul class="comment-ul" data-id="<?php echo $row['id']; ?>">
                     <?php foreach ($allComments as $c): ?>
-                    <?php if ($c['post_id'] == $row['id']): ?>
-                        <li class="comment-li">
-                            <strong><?php echo $c['username']; ?> </strong>
-                            <p><?php echo $c['comment']; ?></p>
-                        </li>
-                    <?php endif; ?>
+                        <?php if ($c['post_id'] == $row['id']): ?>
+                            <li class="comment-li" >
+                                <strong><?php echo $c['username']; ?> </strong>
+                                <p><?php echo $c['comment']; ?></p>
+                            </li>
+                        <?php endif; ?>
                     <?php endforeach; ?>
                 </ul>
 

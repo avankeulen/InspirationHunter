@@ -36,13 +36,24 @@ class Comment {
         $this->comment = $comment;
     }
 
+    public function getUsername()
+    {
+        return $this->username;
+    }
+    public function setUsername($username)
+    {
+        $this->username = $username;
+    }
+
+
+
 
 
     public function PlaceComment() {
         $conn = Db::getInstance();
         $statement = $conn->prepare("insert into comments (user_id, username, post_id, comment) values (:u, :un, :p,:c );");
         $statement->bindValue(':u', $this->getUserId());
-        $statement->bindValue(':un', $_SESSION['username']);
+        $statement->bindValue(':un', $this->getUsername());
         $statement->bindValue(':p', $this->getPostId());
         $statement->bindValue(':c', $this->getComment());
         $statement->execute();
