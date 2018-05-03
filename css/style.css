@@ -153,7 +153,7 @@ h1 {
     overflow: visible;
 }
 
-#flag-btn {
+.flag-btn {
     float: right;
     background-color: none;
     color: #e74b4b;

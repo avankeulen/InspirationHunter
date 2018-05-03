@@ -4,7 +4,6 @@ include_once ('classes/Post.class.php');
 include_once ('classes/User.class.php');
 include_once ('classes/Follow.class.php');
 include_once ('classes/Comment.class.php');
-include_once ('classes/Flag.class.php');
 
 $u = new User;
 $user_id = $u->getUserID();
@@ -44,7 +43,7 @@ $allComments = $comment->GetComments();
 rsort($allComments);
 
 if (!empty($_POST['flag'])) {
-    $flag = new Flag();
+    $flag = new Post();
     $flag->setPostId($_POST['flag']);
     $flag->flag_post();
 }
@@ -80,10 +79,10 @@ if (!empty($_POST['flag'])) {
                 <form action="" method="post" id="flag">
                     <a href="#">
                         <input type="hidden" value="<?php echo $row['id'];?>" name="flag">
-                        <input type="submit" value="Flag" id="flag-btn">
+                        <input type="submit" value="Flag" class="flag-btn" data-id="<?php echo $row['id'];?>">
                     </a>
                 </form>
-                <p>This post has been flagged: <?php echo $row['flag']; ?> time<?php if ($row['flag'] != 1): ?>s<?php endif; ?></p>
+                <p>This post has been flagged: <strong class="flag-count"><?php echo $row['flag']; ?></strong> time<?php if ($row['flag'] != 1): ?>s<?php endif; ?></p>
 
                 <div id="img-div">
                     <img src="<?php echo 'images/uploads/'.$row['post_img']; ?>" alt="post_img" width="50px" height="auto">
