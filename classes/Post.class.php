@@ -10,6 +10,14 @@ class Post {
     private $time;
     private $post_id;
 
+    public function postUsername() {
+        $conn = Db::getInstance();
+        $statementUser = $conn->prepare("select * from users");
+        $statementUser->execute();
+        $res =  $statementUser->fetchAll();
+        return $res;
+    }
+
     public function getImage()
     {
         return $this->image;
@@ -22,7 +30,6 @@ class Post {
         $image = $image_crop;*/
         $this->image = $image;
     }
-
 
     public function getDescription()
     {

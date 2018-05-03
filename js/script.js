@@ -74,8 +74,6 @@ $('.flag-btn').on("click", function (e) {
                 
                 if (newValue == 1) {
                     element.closest('li.post').find('span').hide();
-                } else {
-                    element.closest('li.post').find('span').show();
                 }
 
             } else {

@@ -115,7 +115,7 @@ $posts = $post->getPosts($g_userID);
 
         $.ajax({
             type: "POST",
-            url: "http://localhost:8888/project/InspirationHunter/ajax/ajax_followuser.php",
+            url: "/ajax/ajax_followuser.php",
             data: {"followUserID"  : followUserID},
             success: function(data){
                 if(data != "ok"){
