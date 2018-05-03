@@ -21,4 +21,33 @@ $(document).ready(function(){
         })
         j=0;
     })
-})
+});
+
+// COMMENT WITH AJAX
+$('.btn-comment').on("click", function (e) {
+    var post_id = $(this).data('id');
+    var element = $(this);
+    var text = element.closest('li.post').find('.comment-text').val();
+    var user = $('.username').text();
+
+    $.ajax({
+        method: "POST",
+        url: "./ajax/ajax_comment.php",
+        data: { text: text, user: user, post_id: post_id }
+    })
+    .done(function( res ) {
+        if (res.status == "success") {
+            var comment = `<li class="comment-li" >
+                            <strong> ${res.user} </strong>
+                            <p> ${res.text} </p>
+                          </li>`;
+
+            element.closest('li.post').find(".comment-ul").prepend(comment);
+            element.closest('li.post').find(".comment-li").first().slideDown();
+            $('.comment-text').val("");
+
+        }
+
+    });
+    e.preventDefault();
+});
