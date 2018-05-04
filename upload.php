@@ -10,9 +10,8 @@ if (!empty($_POST)){
     //$_POST['time'];
     $user_id = $_SESSION['username'];
 
-
-
     if (!empty($image) && !empty($description) && !empty($title)) {
+
         $post = new Post();
         $post->setImage($image);
         $post->setDescription($description);
@@ -27,7 +26,8 @@ if (!empty($_POST)){
             $filetmp = $_FILES["upload_file"]["tmp_name"];
             $filename = $image;
             $filepath = "/images/uploads/".$filename;
-            move_uploaded_file($filetmp,SITE_ROOT.$filepath);
+
+            move_uploaded_file($im2,SITE_ROOT.$filepath);
 
             header('location: index.php');
 
@@ -50,9 +50,8 @@ if (!empty($_POST)){
 <?php include_once ('inc/nav.inc.php'); ?>
 
 <section class="content">
-    <form action="" method="post" enctype="multipart/form-data">
-        <h1>Upload Post</h1>
-
+    <h1>Upload Post</h1>
+    <form action="" method="post" enctype="multipart/form-data" id="upload-form">
         <?php if (isset($error)): ?>
             <div><?php echo $error; ?></div>
         <?php endif; ?>
@@ -67,7 +66,9 @@ if (!empty($_POST)){
         
         <label for="upload-desc">Description</label>
         <input type="text" name="description" placeholder="Description" id="upload-desc">
-        <input type="submit" name="submit">
+        <br>
+
+        <input type="submit" name="submit" value="Upload">
     </form>
 </section>
 

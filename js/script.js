@@ -52,11 +52,14 @@ $('.btn-comment').on("click", function (e) {
     e.preventDefault();
 });
 
+//$('.flag-p').hide();
+
 $('.flag-btn').on("click", function (e) {
     var post_id = $(this).data('id');
     var element = $(this);
     var flagcount = parseInt(element.closest('li.post').find(".flag-count").text());
 
+    //element.closest('li.post').find('.flag-p').show();
 
     $.ajax({
         method: "POST",
