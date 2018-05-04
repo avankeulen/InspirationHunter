@@ -64,7 +64,7 @@ if (!empty($_POST['flag'])) {
 
 
 <section class="content">
-    <h1 id="welcome">Welcome <strong class="username"><?php echo $_SESSION['username']; ?></strong></h1>
+    <h1 id="welcome">Welcome, <strong class="username"><?php echo $_SESSION['username']; ?></strong></h1>
 
     <?php if (isset($result)): ?>
         <?php foreach($result as $r): ?>
@@ -79,13 +79,15 @@ if (!empty($_POST['flag'])) {
 
             <li class="post" data-id="<?php echo $row['id'];?>" value="<?php echo $row['id'];?>">
 
-                <a href="\#">
+                <a href="account.php?userID=<?php echo $row['user_id']; ?>" id="user-link">
                     <?php foreach ($username as $u): ?>
                     <?php if ($row['user_id'] == $u['id']):?>
-                    <div><?php echo $u['user_img']; ?></div>
+                    <div id="user-img-div"><img src="images/uploads/avatar/<?php echo $u['user_img']; ?>" alt=""></div>
                     <h3><?php echo $u['username']; ?></h3>
+                            <br><p id="time-set"><?php echo $row['time_set']; ?></p>
                     <?php endif; ?>
                     <?php endforeach; ?>
+
                 </a>
 
                 <form action="" method="post" id="flag">
@@ -94,9 +96,9 @@ if (!empty($_POST['flag'])) {
                         <input type="submit" value="Flag" class="flag-btn" data-id="<?php echo $row['id'];?>">
                     </a>
                 </form>
-                <p>This post has been flagged: <strong class="flag-count"><?php echo $row['flag']; ?></strong> time<?php if ($row['flag'] != 1): ?><span class="s">s</span><?php endif; ?></p>
 
-                <p id="time-set"><?php echo $row['time_set']; ?></p>
+                <p class="flag-p">This post has been flagged: <strong class="flag-count"><?php echo $row['flag']; ?></strong> time<?php if ($row['flag'] != 1): ?><span class="s">s</span><?php endif; ?></p>
+
 
                 <div id="img-div">
                     <img src="<?php echo 'images/uploads/'.$row['post_img']; ?>" alt="post_img" width="50px" height="auto">
