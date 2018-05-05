@@ -37,7 +37,6 @@ nav {
 #links a:active {
     text-decoration: none;
     margin-right: 20px;
-
     display: inline-block;
 }
 #links a:hover {}
@@ -230,12 +229,14 @@ h1 {
 }
 
 #upload-form label {
-    font-size: 1.3em;
+    font-size: 1em;
     color: #6A6B6E;
     font-weight: 700;
+    display: block;
+    margin-bottom: -10px;
 }
 #upload-form input {
-    margin-bottom: 10px;
+    margin-bottom: 20px;
 }
 #upload-form input[type=text] {
     max-width: 250px;
@@ -255,6 +256,10 @@ h1 {
     width: 100px;
 }
 
+#img-prev {
+    max-width: 300px;
+    clear: left;
+}
 
 @media only screen and (min-width: 760px) {
     .list {
@@ -270,4 +275,51 @@ h1 {
     h1 {
         text-align: left;
     }
+}
+
+@media only screen and (max-width: 759px) {
+    #upload-form {
+        margin-left: 10px;
+        margin-right: 10px;
+    }
+    #nav_logo {
+        margin-left: 10px;
+        margin-top: 2px;
+    }
+    #links a:link,
+    #links a:visited,
+    #links a:hover,
+    #links a:active {
+        text-indent: -9999px;
+        background-position: center;
+        background-size: contain;
+        background-repeat: no-repeat;
+        width: 30px;
+        height: 70%;
+        margin: 0;    
+        margin-right: 10px;
+    }
+    
+    #links #upload-a {
+        background-image: url('../images/upload.svg');
+        background-size: 40%;
+        padding: 3px;
+    }
+    #logout-a {
+        text-indent: -9999px;
+        background-image: url('../images/logout.svg');
+        margin-right: 10px;
+        
+    }
+    #profile-a {
+        text-indent: -9999px;
+        background-image: url('../images/avatar.svg');
+        
+    }
+    #search {
+        width: 125px;
+        margin-left: 10px;
+    }
+    
+    
 }
