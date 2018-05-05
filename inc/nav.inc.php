@@ -9,7 +9,7 @@
 
             <div id="links">
                 <a href="upload.php" id="upload-a" style="color: white;"><span>+</span> UPLOAD</a>
-                <a href="account.php" style="color: white;">ACCOUNT</a>
+                <a href="account.php" style="color: white;" id="profile-a">PROFILE</a>
                 <a href="logout.php" id="logout-a">LOG OUT</a>
             </div>
 

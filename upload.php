@@ -57,20 +57,46 @@ if (!empty($_POST)){
         <?php endif; ?>
         
         <label for="upload-title">Title</label>
+        <br>
         <input type="text" name="title" placeholder="Title" id="upload-title">
         <br>
-        
+
+
         <label for="upload-file">Image</label>
-        <input type="file" name="upload_file"  accept="image/*" id="upload-file">
         <br>
-        
+        <div id="prev-div">
+            <img id="img-prev" src="#" alt="uploaded image" />
+            <br>
+        </div>
+        <input type="file" name="upload_file"  accept="image/*" id="upload-file" onchange="readURL(this);">
+        <br>
         <label for="upload-desc">Description</label>
+        <br>
         <input type="text" name="description" placeholder="Description" id="upload-desc">
         <br>
 
         <input type="submit" name="submit" value="Upload">
     </form>
 </section>
+
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+
+<script>
+    $('#prev-div').hide();
+    function readURL(input) {
+        if (input.files && input.files[0]) {
+
+            var reader = new FileReader();
+
+            reader.onload = function (e) {
+                $('#prev-div').show();
+                $('#img-prev').attr('src', e.target.result);
+            };
+
+            reader.readAsDataURL(input.files[0]);
+        }
+    }
+</script>
 
 
 </body>
