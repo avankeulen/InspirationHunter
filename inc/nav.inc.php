@@ -8,9 +8,9 @@
             </form>
 
             <div id="links">
-                <a href="upload.php">UPLOAD</a>
-                <a href="account.php">ACCOUNT</a>
-                <a href="logout.php">LOG OUT</a>
+                <a href="upload.php" id="upload-a" style="color: white;"><span>+</span> UPLOAD</a>
+                <a href="account.php" style="color: white;" id="profile-a">PROFILE</a>
+                <a href="logout.php" id="logout-a">LOG OUT</a>
             </div>
 
         </nav>
