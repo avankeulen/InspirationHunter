@@ -25,10 +25,11 @@ if (!empty($_POST)){
 
             $filetmp = $_FILES["upload_file"]["tmp_name"];
             $filename = $image;
-            $filepath = "/images/uploads/".$filename;
-
-            move_uploaded_file($filename,SITE_ROOT.$filepath);
-
+            
+            $destFile = __DIR__ . '/images/uploads/' . $filename;
+            move_uploaded_file($_FILES['upload_file']['tmp_name'], $destFile);
+            chmod($destFile, 0666);
+            
             header('location: index.php');
 
         } else {
