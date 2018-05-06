@@ -27,7 +27,7 @@ if (!empty($_POST)){
             $filename = $image;
             $filepath = "/images/uploads/".$filename;
 
-            move_uploaded_file($im2,SITE_ROOT.$filepath);
+            move_uploaded_file($filename,SITE_ROOT.$filepath);
 
             header('location: index.php');
 
