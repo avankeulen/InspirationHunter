@@ -55,3 +55,5 @@
         <?php endif; ?>
     <?php endwhile; ?>
 </ul>
+
+<button class="show-posts">Show more</button>
