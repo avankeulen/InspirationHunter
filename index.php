@@ -16,7 +16,7 @@ $f = new Follow();
 $followUserID = $f->getfollowUserID($user_id);
 
 $post = new Post();
-$posts = $post->getPosts($followUserID);
+$posts = $post->getAllPosts($followUserID);
 
 $getUsername = new Post();
 $username = $getUsername->postUsername();

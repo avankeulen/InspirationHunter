@@ -21,11 +21,10 @@ $user_id = $u->getUserID();
 if(isset($_POST['delete'])){
     $id = $_POST['id'];
     $conn = Db::getInstance();
-        $postDelete = $conn->prepare("delete from posts where id = :id and user_id = :user_id");
-        $postDelete->bindValue(":id", $id);
-        $postDelete->bindValue(":user_id", $user_id);
-        $postDelete->execute();
-
+    $postDelete = $conn->prepare("delete from posts where id = :id and user_id = :user_id");
+    $postDelete->bindValue(":id", $id);
+    $postDelete->bindValue(":user_id", $user_id);
+    $postDelete->execute();
 }
 
 $getUsername = new Post();
@@ -53,6 +52,7 @@ if (!empty($_POST['comment'])){
     $c->PlaceComment();
 }
 
+
 ?>
 
 <!DOCTYPE html>
@@ -72,22 +72,23 @@ if (!empty($_POST['comment'])){
     <h1> ACCOUNT </h1>
 
     <?php
-    $g_userID = $user_id;
-    if(isset($_GET['userID'])){
-        $g_userID = htmlspecialchars($_GET["userID"]);
-    }
-    
-    $userDetails = $u->getAccountDetails($g_userID);
 
-$post = new Post();
-$posts = $post->getPosts($g_userID);
-?>
+        $g_userID = $user_id;
+        if(isset($_GET['userID'])){
+            $g_userID = htmlspecialchars($_GET["userID"]);
+        }
+
+        $userDetails = $u->getAccountDetails($g_userID);
+
+        $post = new Post();
+        $posts = $post->getCustomPosts($g_userID);
+
+    ?>
     <a href="">Edit</a>
     <?php
     if($g_userID != $user_id){ ?>
-        <a id="btnFollow" href="javascript: followUser();"></a><?php
-    }
-    ?>
+        <a id="btnFollow" href="javascript: followUser();">Follow</a>
+    <?php } ?>
 
 
     <a href="settings.php">Edit</a>
@@ -155,6 +156,11 @@ $posts = $post->getPosts($g_userID);
                             <?php endif; ?>
                         <?php endforeach; ?>
                     </ul>
+
+                    <form action="" method="post">
+                        <input type="hidden" name="id" value="<?php echo $row['id']; ?>">
+                        <input type="submit" name="delete" value="Delete" />
+                    </form>
 
                 </li>
 

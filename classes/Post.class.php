@@ -93,7 +93,14 @@ class Post {
 
     }
     
-    public function getPosts($user_id){
+    public function getAllPosts($user_id){
+        $conn = Db::getInstance();
+        //$statement = $conn->prepare("select * from posts where user_id = '".$user_id."'");
+        $statement = $conn->prepare("select * from posts p inner join follow f on p.user_id = f.followUserID where f.status = 1");
+        $statement->execute();
+        return $statement;
+    }
+    public function getCustomPosts($user_id){
         $conn = Db::getInstance();
         $statement = $conn->prepare("select * from posts where user_id = '".$user_id."'");
         $statement->execute();
