@@ -72,6 +72,67 @@ class Follow {
             return "ok";
         }
     }
+
+    /*private $user_id;
+    private $followUser_id;
+    private $status;
+
+    public function getUserId()
+    {
+        return $this->user_id;
+    }
+
+    public function setUserId($user_id)
+    {
+        $this->user_id = $user_id;
+    }
+
+    public function getFollowUserId()
+    {
+        return $this->followUser_id;
+    }
+
+    public function setFollowUserId($followUser_id)
+    {
+        $this->followUser_id = $followUser_id;
+    }
+
+    public function getStatus()
+    {
+        return $this->status;
+    }
+
+    public function setStatus($status)
+    {
+        $this->status = $status;
+    }
+
+    public function followUser() {
+        $conn = Db::getInstance();
+        $statement = $conn->prepare("insert into follow (userID, followUserID, status) values (:u, f, :s)");
+        $statement->bindValue(":u", $this->getUserId());
+        $statement->bindValue(":f", $this->getFollowUserId());
+        $statement->bindValue(":s", 1);
+        $statement->execute();
+    }
+
+    public function unfollowUser() {
+        $conn = Db::getInstance();
+        $statement = $conn->prepare("delete from follow where userID = :u and followUserID = :f");
+        $statement->bindValue(":u", $this->getUserId());
+        $statement->bindValue(":f", $this->getFollowUserId());
+        $statement->execute();
+    }
+
+    public function followCheck() {
+        $conn = Db::getInstance();
+        $statement = $conn->prepare("select * from follow");
+        $statement->execute();
+        $result = $statement->fetch(PDO::FETCH_ASSOC);
+        return $result;
+    }*/
+
+
 }
 
 

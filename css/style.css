@@ -227,8 +227,10 @@ h1 {
     background-color: none;
     color: #e74b4b;
     border: 2px solid #e74b4b;
+    font-size: .7em;
     border-radius: 100px;
     margin-bottom: 10px;
+    padding: 3px;
 }
 
 
