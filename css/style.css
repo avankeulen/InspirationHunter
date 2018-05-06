@@ -87,7 +87,36 @@ h1 {
     font-weight: 700;
 }
 
-
+#all-users-list {
+    overflow-x: scroll;
+    white-space: nowrap;
+    padding: 10px;
+    margin-bottom: 20px;
+    width: 100%;
+}
+#user-list-item {
+    display: inline-block;
+    background-color: #F4F4F4;
+    overflow: hidden;
+    margin-right: 20px;
+    border-radius: 5px;
+    width: 200px;
+}
+#user-list-item a {
+    width: 200px;
+    display: flex;
+    padding: 10px;
+    text-decoration: none;
+}
+#user-list-item h3 {
+    font-weight: 700;
+    padding-top: 10px;
+    font-size: 1.3em;
+    color: #1f1d1d;
+}
+#user-list-item img {
+    width: 100%;
+}
 
 .post {
     width: 100%;
@@ -128,13 +157,17 @@ h1 {
     margin-left: -50px;
 }
 
-.post #user-img-div {
+#user-img-div {
     width: 40px;
     height: 40px;
     display: block;
     border-radius: 100px;
     overflow: hidden;
     margin-right: 10px;
+}
+
+.list {
+    margin-top: 20px;
 }
 
 .post img {
@@ -172,6 +205,7 @@ h1 {
 /* width */
 ::-webkit-scrollbar {
     width: 4px;
+    height: 4px;
     border-radius: 1000px;
 }
 
@@ -321,6 +355,8 @@ h1 {
         width: 125px;
         margin-left: 10px;
     }
+    
+    
     
     
 }

@@ -131,4 +131,14 @@ class User {
         $result =  $statement->fetch();
         return $result;
     }
+
+    public function getAllUsers() {
+        $conn = Db::getInstance();
+        $statement = $conn->prepare("select * from users where id != :u");
+        $statement->bindValue(":u", $_SESSION['user_id']);
+        $statement->execute();
+        $allUsers = $statement->fetchAll(PDO::FETCH_ASSOC);
+        return $allUsers;
+    }
+
 }
