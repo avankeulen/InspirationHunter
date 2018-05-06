@@ -5,6 +5,11 @@
 if (!empty($_POST)){
     $title = $_POST['title'];
     $image = $_FILES['upload_file']['name'];
+
+    $temp = explode(".", $_FILES['upload_file']['name']);
+    $newfilename = round(microtime(true)) . '.' . end($temp);
+    $image = $newfilename;
+
     $description = $_POST['description'];
     $time = "";
     //$_POST['time'];
