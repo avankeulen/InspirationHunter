@@ -31,6 +31,7 @@ if (!empty($_POST)) {
     <link rel="shortcut icon" href="images/logo.ico">
 
     <link rel="stylesheet" href="css/reset.css">
+    <link rel="stylesheet" href="css/mobile-reset.css">
     <link href="https://fonts.googleapis.com/css?family=Karla:400,700" rel="stylesheet">
     <link rel="stylesheet" href="css/logreg.css">
 </head>

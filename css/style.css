@@ -343,13 +343,10 @@ h1 {
     #logout-a {
         text-indent: -9999px;
         background-image: url('../images/logout.svg');
-        margin-right: 10px;
-        
     }
     #profile-a {
         text-indent: -9999px;
         background-image: url('../images/avatar.svg');
-        
     }
     #search {
         width: 125px;
