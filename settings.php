@@ -40,23 +40,30 @@ if( $statement->rowCount() > 0){
 	$user = $statement->fetch(); // array van resultaten opvragen
 }
 
+
 ?><!DOCTYPE html>
 <html lang="en">
 
 <head>
     <meta charset="UTF-8">
+    <?php include_once ('inc/head.inc.php'); ?>
     <title>InspirationHunter Settings</title>
     <link rel="stylesheet" href="css/style.css">
 	
 </head>
 
 <body>
+<?php include_once ('inc/nav.inc.php'); ?>
 
 <h1> Pas account aan:  </h1>
 
-    <section class="login-form-wrap3">
+<div style="margin:20px 10px 10px 10px; padding:25px;border-radius:7px;background-color:rgba(93,180,205,0.25);box-shadow: 0 2px 3px rgba(0,0,0,.16);color:#0781ad;border:solid 1px #0781ad;opacity:0.66;">
+    Warning: Editing your account will require us to automatically log you in again! 
+</div>
 
-        <form class="password-form" method="POST" action="" enctype="multipart/form-data">
+    <section class="login-form-wrap3" class="content" >
+
+        <form class="password-form" method="POST" action="" enctype="multipart/form-data" id="upload-form">
             <label>username :
                 <input class="textbox" type="text" name="username" value=<?php echo $user['username'] ?> >
             </label><br />

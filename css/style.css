@@ -295,6 +295,26 @@ h1 {
     clear: left;
 }
 
+#button-regular{
+    background-color: #b0cbbd;
+    border: none;
+    color: white;
+    padding: 5px;
+    font-size: 1.3em;
+    margin-bottom: 0;
+    width: 100px;
+}
+
+#btnFollow{
+    background-color: #b0cbbd;
+    border: none;
+    color: white;
+    padding: 5px;
+    font-size: 1.3em;
+    margin-bottom: 0;
+    width: 100px;
+}
+
 @media only screen and (min-width: 760px) {
     .list {
         display: flex;

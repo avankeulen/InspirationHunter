@@ -84,14 +84,16 @@ if (!empty($_POST['comment'])){
         $posts = $post->getCustomPosts($g_userID);
 
     ?>
-    <a href="">Edit</a>
+   
     <?php
     if($g_userID != $user_id){ ?>
         <a id="btnFollow" href="javascript: followUser();">Follow</a>
     <?php } ?>
 
-
-    <a href="settings.php">Edit</a>
+    <?php
+    if($g_userID == $user_id){ ?>
+    <a href="settings.php" id="button-regular">Edit</a>
+    <?php } ?>
 
     <section class="login-form-wrap2">
 
