@@ -100,13 +100,14 @@ if (!empty($_POST['comment'])){
         <img class="profilepic" src="img.php?id=<?php echo $g_userID; ?>" alt="" style="height: 200px;" alt="Profilepic">
 
         <div class="accountanddiscription">
-            <h3 class="accountname"><?php echo $userDetails['username']?></h3>
-            <p class="bio">Bio: <?php echo $userDetails['bio'] ?></p>
+            <h3 style="color: grey;">profile</h3>
+            <h1 style="font-size: 1.8em; color: grey; margin: 20px 0px 0px 0px;" class="accountname"><?php echo $userDetails['username']?></h1>
+            <h1 style="font-size: 1.3em; color: grey; margin: 20px 0px 0px 0px; font-weight: 10;"  class="bio">Bio: <?php echo $userDetails['bio'] ?></h1>
 
         </div>
 
 
-<h2> MY POSTS: </h2>
+<h1 style="font-size: 1.5em;"> MY POSTS </h1>
 <ul class="list">
         <?php while($row = $posts->fetch()) : ?>
             <?php if ($row['flag'] < 3): ?>
@@ -161,7 +162,7 @@ if (!empty($_POST['comment'])){
 
                     <form action="" method="post">
                         <input type="hidden" name="id" value="<?php echo $row['id']; ?>">
-                        <input type="submit" name="delete" value="Delete" />
+                        <input id="btnDelete" type="submit" name="delete" value="Delete" />
                     </form>
 
                 </li>
