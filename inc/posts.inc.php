@@ -10,6 +10,14 @@
                             <div id="user-img-div"><img src="images/uploads/avatar/<?php echo $u['user_img']; ?>" alt=""></div>
                             <h3><?php echo $u['username']; ?></h3>
                             <br><p id="time-set"><?php echo $row['time_set']; ?></p>
+                   
+                              <p class="locationName"><?php 
+                               // $adress = $functie("lng", "lat");
+                               // echo $adress['city'];
+                            
+                            ?></p>
+                     
+
                         <?php endif; ?>
                     <?php endforeach; ?>
 

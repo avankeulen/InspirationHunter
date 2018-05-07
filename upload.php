@@ -80,13 +80,15 @@ if (!empty($_POST)){
         <br>
         <input type="text" name="description" placeholder="Description" id="upload-desc">
         <br>
+        <input type="text" hidden id="lng" name="lng"><input type="text" hidden id="lat" name="lat">
 
         <input type="submit" name="submit" value="Upload">
     </form>
+    <input type="text" id="error">
 </section>
 
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
-
+<script src="js/geolocation.js"></script>
 <script>
     $('#prev-div').hide();
     function readURL(input) {
@@ -102,6 +104,8 @@ if (!empty($_POST)){
             reader.readAsDataURL(input.files[0]);
         }
     }
+
+    getLocationName();
 </script>
 
 
