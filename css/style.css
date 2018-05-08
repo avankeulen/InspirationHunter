@@ -214,6 +214,18 @@ h1 {
     font-weight: 700;
 }
 
+.like-post {
+    float: right;
+    display: block;
+    width: 30px;
+    height: 30px;
+    text-indent: -9999px;
+    background-image: url('../images/love.svg');
+    background-size: cover;
+    background-repeat: no-repeat;
+    margin-top: -35px;
+}
+
 .show-posts {
     margin-top: 20px;
     margin-bottom: 20px;
