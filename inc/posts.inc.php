@@ -1,3 +1,17 @@
+<?php
+
+include_once ('classes/Like.class.php');
+
+if (!empty($_GET['like'])) {
+    $l = new Like();
+    $l->setPostId($_GET['like']);
+    $l->setUserId($_SESSION['user_id']);
+    $l->likePost();
+}
+
+
+?>
+
 <ul class="list">
     <?php while($row = $posts->fetch()) : ?>
         <?php if ($row['flag'] < 3): ?>
@@ -41,6 +55,8 @@
                 </div>
                 <h2><?php echo $row['title']; ?></h2>
                 <p><?php echo $row['description']; ?></p>
+
+                <a href="?like=<?php echo $row['id'];?>" class="like-post">Like</a>
 
 
                 <form action="" method="post" class="comment-form">
