@@ -37,7 +37,7 @@
                     
                     <!--<a alt="post_img" href="detail.php?watch=" style="background-image: <?php //echo 'images/uploads/'. $row['post-img']; ?> ")></a>-->
                     
-                    <img src="<?php //echo 'images/uploads/'.$row['post_img']; ?>" alt="post_img" width="50px" height="auto">
+                    <img src="<?php echo 'images/uploads/'.$row['post_img']; ?>" alt="post_img" width="50px" height="auto">
                 </div>
                 <h2><?php echo $row['title']; ?></h2>
                 <p><?php echo $row['description']; ?></p>
