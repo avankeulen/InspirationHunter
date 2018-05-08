@@ -88,7 +88,7 @@ if (!empty($_POST['comment'])){
    
     <?php
     if($g_userID != $user_id){ ?>
-        <a id="btnFollow" href="javascript: followUser();">Follow</a>
+        <a id="btnFollow" href="javascript: followUser();"></a>
     <?php } ?>
 
     <?php
