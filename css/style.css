@@ -53,6 +53,9 @@ nav {
 #logout-a {
     color: #697971;
 }
+#logout-a:hover {
+    color: #e74b4b;
+}
 
 #nav_logo {
     background-image: url('../images/logoWHITE.svg');
@@ -117,7 +120,7 @@ h1 {
 }
 
 #user-list-item:hover{
-    transform: scale(0.85);
+    transform: scale(0.9);
 }
 
 #user-list-item a {
@@ -161,6 +164,12 @@ h1 {
     max-height: 300px;
     overflow: hidden;
 }
+.post #img-div a {
+    width: 100%;
+    height: 100%;
+    background-size: cover;
+}
+
 .post #user-link {
     display: flex;
     text-decoration: none;
@@ -274,7 +283,9 @@ h1 {
     color: white;
     border: none;
     float: right;
-    height: 32px;
+    height: 30px;
+    width: 75px;
+    font-size: .8em;
 }
 
 
