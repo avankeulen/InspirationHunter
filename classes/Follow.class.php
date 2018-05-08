@@ -67,7 +67,7 @@ class Follow {
         
 
         if(!$result){
-            return "Er is een probleem opgetreden";
+            return "A problem has occured! Please try again.";
         }else{
             return "ok";
         }

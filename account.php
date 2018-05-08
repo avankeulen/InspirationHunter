@@ -7,6 +7,7 @@
     include_once ('classes/Comment.class.php');
 
 
+
 //    $u = new User();
 //    $userDetails = $u->getUserDetails();
 
@@ -181,7 +182,7 @@ if (!empty($_POST['comment'])){
     function getFollowStatus(followUserID) {
         $.ajax({
             type: "POST",
-            url: "http://localhost:8888/project/InspirationHunter/ajax/ajax_getFollowStatus.php",
+            url: "ajax/ajax_getFollowStatus.php",
             data: {"followUserID"  : followUserID},
             success: function(data){
                 document.getElementById("btnFollow").innerHTML = data;
@@ -194,7 +195,7 @@ if (!empty($_POST['comment'])){
 
         $.ajax({
             type: "POST",
-            url: "/ajax/ajax_followuser.php",
+            url: "ajax/ajax_followuser.php",// "/ajax/ajax_followuser.php"
             data: {"followUserID"  : followUserID},
             success: function(data){
                 if(data != "ok"){
