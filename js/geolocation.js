@@ -10,7 +10,7 @@ navigator.geolocation.getCurrentPosition(function(position) {
             url: link,
             dataType: "json",
             success: function (data) {
-                $(".locationJS").innterHTML(data.results[0].address_components[1].short_name + " " + data.results[0].address_components[0].short_name + ", " + data.results[0].address_components[2].short_name);
+                $(".locationJS").innerHTML(data.results[0].address_components[1].short_name + " " + data.results[0].address_components[0].short_name + ", " + data.results[0].address_components[2].short_name);
             }
         });
     }
