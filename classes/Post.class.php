@@ -4,6 +4,7 @@ include_once ('Db.class.php');
 
 class Post {
     private $image;
+    private $filter;
     private $description;
     private $user_id;
     private $title;
@@ -29,6 +30,15 @@ class Post {
         $image_crop = imagecrop($image, ['x' => 0, 'y' => 0, 'width' => $size, 'height' => $size]);
         $image = $image_crop;*/
         $this->image = $image;
+    }
+
+    public function getFilter()
+    {
+        return $this->filter;
+    }
+    public function setFilter($filter)
+    {
+        $this->filter = $filter;
     }
 
     public function getDescription()
@@ -78,12 +88,13 @@ class Post {
 
     public function SavePost() {
         $conn = Db::getInstance();
-        $statement = $conn->prepare("insert into posts (user_id, description, post_img, title, time_set) VALUES (:id, :d, :p, :t, :ti)");
+        $statement = $conn->prepare("insert into posts (user_id, description, post_img, title, time_set, filter) VALUES (:id, :d, :p, :t, :ti, :f)");
         $statement->bindValue(":id", $this->getUserId());
         $statement->bindValue(":d", $this->getDescription());
         $statement->bindValue(":p", $this->getImage());
         $statement->bindValue(":t", $this->getTitle());
         $statement->bindValue(":ti", $this->getTime());
+        $statement->bindValue(":f", $this->getFilter());
 
         if ($statement->execute()){
             return true;

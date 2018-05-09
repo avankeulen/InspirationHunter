@@ -10,6 +10,8 @@ if (!empty($_POST)){
     $newfilename = round(microtime(true)) . '.' . end($temp);
     $image = $newfilename;
 
+    $filter = $_POST['filter'];
+
     $description = $_POST['description'];
     $time = "";
     //$_POST['time'];
@@ -19,6 +21,7 @@ if (!empty($_POST)){
 
         $post = new Post();
         $post->setImage($image);
+        $post->setFilter($filter);
         $post->setDescription($description);
         $post->setUserId($user_id);
         $post->setTitle($title);
@@ -71,10 +74,44 @@ if (!empty($_POST)){
         <label for="upload-file">Image</label>
         <br>
         <div id="prev-div">
+            <figure class="<?php $_POST['filter'] ?>">
             <img id="img-prev" src="#" alt="uploaded image" />
+            </figure>
             <br>
         </div>
         <input type="file" name="upload_file"  accept="image/*" id="upload-file" onchange="readURL(this);">
+        <br>
+        <label for="upload-filter">Filter</label>
+        <br>
+        <select id="opload-filter" name="filter" placeholder="None">
+            <option value="#nofilter">None</option>
+            <option value="_1977">1977</option>
+            <option value="aden">Aden</option>
+            <option value="brannan">Brannan</option>
+            <option value="brooklyn">Brooklyn</option>
+            <option value="clarendon">Clarendon</option>
+            <option value="earlybird">Earlybird</option>
+            <option value="gingham">Gingham</option>
+            <option value="hudson">Hudson</option>
+            <option value="inkwell">Inkwell</option>
+            <option value="kelvin">Kelvin</option>
+            <option value="lark">Lark</option>
+            <option value="lofi">Lo-Fi</option>
+            <option value="maven">Maven</option>
+            <option value="mayfair">Mayfair</option>
+            <option value="moon">Moon</option>
+            <option value="nashville">Nashville</option>
+            <option value="perpetua">Perpetua</option>
+            <option value="reyes">Reyes</option>
+            <option value="rise">Rise</option>
+            <option value="slumber">Slumber</option>
+            <option value="stinson">Stinson</option>
+            <option value="toaster">Toaster</option>
+            <option value="valencia">Valencia</option>
+            <option value="walden">Walden</option>
+            <option value="willow">Willow</option>
+            <option value="xpro2">X-pro II</option>
+        </select>
         <br>
         <label for="upload-desc">Description</label>
         <br>
