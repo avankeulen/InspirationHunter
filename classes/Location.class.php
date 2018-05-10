@@ -1,4 +1,5 @@
 <?php
+include_once ('Db.class.php');
 
 
 function Get_Address_From_Google_Maps($lat, $lon) {

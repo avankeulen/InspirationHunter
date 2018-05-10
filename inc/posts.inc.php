@@ -9,6 +9,7 @@ if (!empty($_GET['like'])) {
     $l->likePost();
 }
 
+$filter = "";
 
 ?>
 
@@ -50,12 +51,13 @@ if (!empty($_GET['like'])) {
                 <div id="img-div">
                     
                     <!--<a alt="post_img" href="detail.php?watch=" style="background-image: <?php //echo 'images/uploads/'. $row['post-img']; ?> ")></a>-->
-                    
+                    <figure class="<?php echo $row['filter'] ?>">
                     <img src="<?php echo 'images/uploads/'.$row['post_img']; ?>" alt="post_img" width="50px" height="auto">
+                    </figure>
                 </div>
                 <h2><?php echo $row['title']; ?></h2>
                 <p><?php echo $row['description']; ?></p>
-
+                
                 <a href="?like=<?php echo $row['id'];?>" class="like-post">Like</a>
 
 
