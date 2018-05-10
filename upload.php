@@ -83,7 +83,7 @@ if (!empty($_POST)){
         <br>
         <label for="upload-filter">Filter</label>
         <br>
-        <select id="opload-filter" name="filter" placeholder="None">
+        <select id="upload-filter" name="filter" placeholder="None" onchange="showFilter();">
             <option value="#nofilter">None</option>
             <option value="_1977">1977</option>
             <option value="aden">Aden</option>
@@ -143,6 +143,12 @@ if (!empty($_POST)){
     }
 
     getLocationName();
+
+    function showFilter() {
+        var x = document.getElementById("upload-filter").value;
+        document.getElementsByTagName("figure")[0].setAttribute("class", x);
+    }
+
 </script>
 
 
