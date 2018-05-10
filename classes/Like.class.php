@@ -33,6 +33,24 @@ class Like {
         $statement->execute();
     }
 
+    public function unLikePost() {
+        $conn = Db::getInstance();
+        $statement = $conn->prepare('delete from likes where user_id = :u and post_id = :p');
+        $statement->bindValue(":u", $this->user_id);
+        $statement->bindValue(":p", $this->post_id);
+        $statement->execute();
+    }
+
+    public function getLikes() {
+        $conn = Db::getInstance();
+        $statement = $conn->prepare('select * from likes');
+        $statement->execute();
+        $res = $statement->fetchAll(PDO::FETCH_ASSOC);
+        return $res;
+    }
+
+
+
 
 
 

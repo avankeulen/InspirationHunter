@@ -1,15 +1,35 @@
 <?php
 
 include_once ('classes/Like.class.php');
+include_once ('classes/Comment.class.php');
+
+$l = new Like();
+$likes = $l->getLikes();
 
 if (!empty($_GET['like'])) {
     $l = new Like();
     $l->setPostId($_GET['like']);
     $l->setUserId($_SESSION['user_id']);
     $l->likePost();
+} else if (!empty($_GET['unlike'])) {
+    $l = new Like();
+    $l->setPostId($_GET['unlike']);
+    $l->setUserId($_SESSION['user_id']);
+    $l->unLikePost();
 }
 
 $filter = "";
+
+// Loop comments in PHP
+$comment = new Comment();
+$allComments = $comment->GetComments();
+rsort($allComments);
+
+if (!empty($_POST['flag'])) {
+    $flag = new Post();
+    $flag->setPostId($_POST['flag']);
+    $flag->flag_post();
+}
 
 ?>
 
@@ -57,8 +77,17 @@ $filter = "";
                 </div>
                 <h2><?php echo $row['title']; ?></h2>
                 <p><?php echo $row['description']; ?></p>
-                
-                <a href="?like=<?php echo $row['id'];?>" class="like-post">Like</a>
+
+                <?php if (isset($likes)):?>
+                    <a href="?like=<?php echo $row['id'];?>" class="like-post like">Like</a>
+                <?php endif; ?>
+                <?php foreach ($likes as $like): ?>
+                    <?php if ($like['post_id'] != $row['id']): ?>
+                        <a href="?like=<?php echo $row['id'];?>" class="like-post like">Like</a>
+                    <?php else: ?>
+                        <a href="?unlike=<?php echo $row['id'];?>" class="like-post unlike">Unlike</a>
+                    <?php endif; ?>
+                <?php endforeach; ?>
 
 
                 <form action="" method="post" class="comment-form">

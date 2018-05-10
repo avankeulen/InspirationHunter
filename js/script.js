@@ -87,4 +87,6 @@ $('.flag-btn').on("click", function (e) {
     e.preventDefault();
 });
 
+
+
 //update posts set flag = 0
