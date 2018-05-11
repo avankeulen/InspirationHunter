@@ -43,16 +43,7 @@ if (!empty($_POST['comment'])){
     $c->setComment($comment);
     $c->PlaceComment();
 }
-// Loop comments in PHP
-$comment = new Comment();
-$allComments = $comment->GetComments();
-rsort($allComments);
 
-if (!empty($_POST['flag'])) {
-    $flag = new Post();
-    $flag->setPostId($_POST['flag']);
-    $flag->flag_post();
-}
 
 
 ?><!doctype html>

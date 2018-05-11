@@ -7,6 +7,7 @@
     include_once ('classes/Comment.class.php');
 
 
+
 //    $u = new User();
 //    $userDetails = $u->getUserDetails();
 
@@ -84,89 +85,94 @@ if (!empty($_POST['comment'])){
         $posts = $post->getCustomPosts($g_userID);
 
     ?>
-    <a href="">Edit</a>
+   
     <?php
     if($g_userID != $user_id){ ?>
-        <a id="btnFollow" href="javascript: followUser();">Follow</a>
+        <a id="btnFollow" href="javascript: followUser();"></a>
     <?php } ?>
 
-
-    <a href="settings.php">Edit</a>
+    <?php
+    if($g_userID == $user_id){ ?>
+    <a href="settings.php" id="button-regular">Edit</a>
+    <?php } ?>
 
     <section class="login-form-wrap2">
 
         <img class="profilepic" src="img.php?id=<?php echo $g_userID; ?>" alt="" style="height: 200px;" alt="Profilepic">
 
         <div class="accountanddiscription">
-            <h3 class="accountname"><?php echo $userDetails['username']?></h3>
-            <p class="bio">Bio: <?php echo $userDetails['bio'] ?></p>
+            <h3 style="color: grey;">profile</h3>
+            <h1 style="font-size: 1.8em; color: grey; margin: 20px 0px 0px 0px;" class="accountname"><?php echo $userDetails['username']?></h1>
+            <h1 style="font-size: 1.3em; color: grey; margin: 20px 0px 0px 0px; font-weight: 10;"  class="bio">Bio: <?php echo $userDetails['bio'] ?></h1>
 
         </div>
 
 
-<h2> MY POSTS: </h2>
-<ul class="list">
-        <?php while($row = $posts->fetch()) : ?>
-            <?php if ($row['flag'] < 3): ?>
+<h1 style="font-size: 1.5em;"> MY POSTS </h1>
+<!--<ul class="list">
+        <?php //while($row = $posts->fetch()) : ?>
+            <?php //if ($row['flag'] < 3): ?>
 
-                <li class="post" data-id="<?php echo $row['id'];?>" value="<?php echo $row['id'];?>">
+                <li class="post" data-id="<?php //echo $row['id'];?>" value="<?php //echo $row['id'];?>">
 
-                    <a href="account.php?userID=<?php echo $row['user_id']; ?>" id="user-link">
-                        <?php foreach ($username as $u): ?>
-                            <?php if ($row['user_id'] == $u['id']):?>
-                                <div id="user-img-div"><img src="images/uploads/avatar/<?php echo $u['user_img']; ?>" alt=""></div>
-                                <h3><?php echo $u['username']; ?></h3>
-                                <br><p id="time-set"><?php echo $row['time_set']; ?></p>
-                            <?php endif; ?>
-                        <?php endforeach; ?>
+                    <a href="account.php?userID=<?php //echo $row['user_id']; ?>" id="user-link">
+                        <?php //foreach ($username as $u): ?>
+                            <?php //if ($row['user_id'] == $u['id']):?>
+                                <div id="user-img-div"><img src="images/uploads/avatar/<?php //echo $u['user_img']; ?>" alt=""></div>
+                                <h3><?php //echo $u['username']; ?></h3>
+                                <br><p id="time-set"><?php //echo $row['time_set']; ?></p>
+                            <?php //endif; ?>
+                        <?php //endforeach; ?>
 
                     </a>
 
                     <form action="" method="post" id="flag">
                         <a href="#">
-                            <input type="hidden" value="<?php echo $row['id'];?>" name="flag">
-                            <input type="submit" value="Flag" class="flag-btn" data-id="<?php echo $row['id'];?>">
+                            <input type="hidden" value="<?php //echo $row['id'];?>" name="flag">
+                            <input type="submit" value="Flag" class="flag-btn" data-id="<?php //echo $row['id'];?>">
                         </a>
                     </form>
 
-                    <p class="flag-p">This post has been flagged: <strong class="flag-count"><?php echo $row['flag']; ?></strong> time<?php if ($row['flag'] != 1): ?><span class="s">s</span><?php endif; ?></p>
+                    <p class="flag-p">This post has been flagged: <strong class="flag-count"><?php //echo $row['flag']; ?></strong> time<?php //if ($row['flag'] != 1): ?><span class="s">s</span><?php //endif; ?></p>
 
 
                     <div id="img-div">
-                        <img src="<?php echo 'images/uploads/'.$row['post_img']; ?>" alt="post_img" width="50px" height="auto">
+                        <img src="<?php //echo 'images/uploads/'.$row['post_img']; ?>" alt="post_img" width="50px" height="auto">
                     </div>
-                    <h2><?php echo $row['title']; ?></h2>
-                    <p><?php echo $row['description']; ?></p>
+                    <h2><?php //echo $row['title']; ?></h2>
+                    <p><?php //echo $row['description']; ?></p>
 
 
                     <form action="" method="post" class="comment-form">
-                        <label for="comment<?php echo $row['id'];?>"></label>
-                        <input type="text" name="comment" id="comment<?php echo $row['id'];?>" class="comment-text" placeholder="Leave a comment...">
-                        <input type="hidden" name="post_id" value="<?php echo $row['id']; ?>" class="id_post">
-                        <input type="submit" value="COMMENT" class="btn-comment" data-id="<?php echo $row['id'];?>">
+                        <label for="comment<?php //echo $row['id'];?>"></label>
+                        <input type="text" name="comment" id="comment<?php //echo $row['id'];?>" class="comment-text" placeholder="Leave a comment...">
+                        <input type="hidden" name="post_id" value="<?php //echo $row['id']; ?>" class="id_post">
+                        <input type="submit" value="COMMENT" class="btn-comment" data-id="<?php //echo $row['id'];?>">
                     </form>
 
-                    <ul class="comment-ul" data-id="<?php echo $row['id']; ?>">
-                        <?php foreach ($allComments as $c): ?>
-                            <?php if ($c['post_id'] == $row['id']): ?>
+                    <ul class="comment-ul" data-id="<?php //echo $row['id']; ?>">
+                        <?php //foreach ($allComments as $c): ?>
+                            <?php //if ($c['post_id'] == $row['id']): ?>
                                 <li class="comment-li" >
-                                    <strong><?php echo $c['username']; ?> </strong>
-                                    <p><?php echo $c['comment']; ?></p>
+                                    <strong><?php //echo $c['username']; ?> </strong>
+                                    <p><?php //echo $c['comment']; ?></p>
                                 </li>
-                            <?php endif; ?>
-                        <?php endforeach; ?>
+                            <?php //endif; ?>
+                        <?php //endforeach; ?>
                     </ul>
 
                     <form action="" method="post">
-                        <input type="hidden" name="id" value="<?php echo $row['id']; ?>">
-                        <input type="submit" name="delete" value="Delete" />
+                        <input type="hidden" name="id" value="<?php //echo $row['id']; ?>">
+                        <input id="btnDelete" type="submit" name="delete" value="Delete" />
                     </form>
 
                 </li>
 
-            <?php endif; ?>
-        <?php endwhile; ?>
-    </ul>
+            <?php //endif; ?>
+        <?php //endwhile; ?>
+    </ul>-->
+
+        <?php include_once ('inc/posts.inc.php'); ?>
 
 
     </section>
@@ -178,7 +184,7 @@ if (!empty($_POST['comment'])){
     function getFollowStatus(followUserID) {
         $.ajax({
             type: "POST",
-            url: "http://localhost:8888/project/InspirationHunter/ajax/ajax_getFollowStatus.php",
+            url: "ajax/ajax_getFollowStatus.php",
             data: {"followUserID"  : followUserID},
             success: function(data){
                 document.getElementById("btnFollow").innerHTML = data;
@@ -191,7 +197,7 @@ if (!empty($_POST['comment'])){
 
         $.ajax({
             type: "POST",
-            url: "/ajax/ajax_followuser.php",
+            url: "ajax/ajax_followuser.php",// "/ajax/ajax_followuser.php"
             data: {"followUserID"  : followUserID},
             success: function(data){
                 if(data != "ok"){

@@ -7,5 +7,6 @@
 <link rel="stylesheet" href="css/reset.css">
 <link rel="stylesheet" href="css/mobile-reset.css">
 <link rel="stylesheet" href="css/style.css">
+<link rel="stylesheet" href="css/cssgram.min.css">
 
 <link href="https://fonts.googleapis.com/css?family=Karla:400,700" rel="stylesheet">

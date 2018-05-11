@@ -1,3 +1,38 @@
+<?php
+
+include_once ('classes/Like.class.php');
+include_once ('classes/Comment.class.php');
+
+
+if (!empty($_POST['like'])) {
+    $l = new Like();
+    $l->setPostId($_POST['like']);
+    $l->setUserId($_SESSION['user_id']);
+    $l->likePost();
+} elseif (!empty($_POST['unlike'])) {
+    $l = new Like();
+    $l->setPostId($_POST['unlike']);
+    $l->setUserId($_SESSION['user_id']);
+    $l->unLikePost();
+}
+
+
+
+$filter = "";
+
+// Loop comments in PHP
+$comment = new Comment();
+$allComments = $comment->GetComments();
+rsort($allComments);
+
+if (!empty($_POST['flag'])) {
+    $flag = new Post();
+    $flag->setPostId($_POST['flag']);
+    $flag->flag_post();
+}
+
+?>
+
 <ul class="list">
     <?php while($row = $posts->fetch()) : ?>
         <?php if ($row['flag'] < 3): ?>
@@ -10,6 +45,14 @@
                             <div id="user-img-div"><img src="images/uploads/avatar/<?php echo $u['user_img']; ?>" alt=""></div>
                             <h3><?php echo $u['username']; ?></h3>
                             <br><p id="time-set"><?php echo $row['time_set']; ?></p>
+                   
+                              <p class="locationName"><?php 
+                               // $adress = $functie("lng", "lat");
+                               // echo $adress['city'];
+                            
+                            ?></p>
+                     
+
                         <?php endif; ?>
                     <?php endforeach; ?>
 
@@ -26,10 +69,39 @@
 
 
                 <div id="img-div">
+                    
+                    <!--<a alt="post_img" href="detail.php?watch=" style="background-image: <?php //echo 'images/uploads/'. $row['post-img']; ?> ")></a>-->
+                    <figure class="<?php echo $row['filter'] ?>">
                     <img src="<?php echo 'images/uploads/'.$row['post_img']; ?>" alt="post_img" width="50px" height="auto">
+                    </figure>
                 </div>
                 <h2><?php echo $row['title']; ?></h2>
                 <p><?php echo $row['description']; ?></p>
+
+
+
+
+
+                <!-- LIKES -->
+                <?php
+                    $likes = "";
+                    $l = new Like();
+                    $l->setUserId($_SESSION['user_id']);
+                    $l->setPostId($row['id']);
+                    $likes = $l->getLikes();
+                ?>
+
+                <form action="" method="post">
+                    <? if($likes['status'] == 1): ?>
+                        <input type="hidden" name="unlike" value="<?php echo $row['id'];?>"">
+                        <input type="submit" class="like-post unlike" data-id="<?php echo ($row['id']. "|" .$_SESSION['user_id']);?>">
+                    <? else: ?>
+                        <input type="hidden" name="like" value="<?php echo $row['id'];?>">
+                        <input type="submit" class="like-post like" data-id="<?php echo ($row['id']. "|" .$_SESSION['user_id']);?>">
+                    <? endif; ?>
+                </form>
+
+
 
 
                 <form action="" method="post" class="comment-form">

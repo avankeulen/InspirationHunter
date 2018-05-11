@@ -87,4 +87,51 @@ $('.flag-btn').on("click", function (e) {
     e.preventDefault();
 });
 
+$('.like-post').on("click", function (e) {
+    var p_u = $(this).data('id').split("|");
+    var post_id = p_u[0];
+    var user_id = p_u[1];
+
+    var element = $(this);
+    var classs = element.attr('class');
+    
+    switch (classs) {
+        case "like-post unlike":
+            $.ajax({
+                method: "POST",
+                url: "./ajax/ajax_unlike.php",
+                data: { user_id: user_id, post_id: post_id }
+            })
+                .done(function( res ) {
+                    if (res.status == "unliked") {
+                        element.removeClass('unlike');
+                        element.addClass('like');
+                        element.css('background-image:', 'url(\'../images/love.svg\')');
+                    } else {
+                        alert("derp");
+                    }
+                });
+            break;
+
+        case "like-post like":
+            $.ajax({
+                method: "POST",
+                url: "./ajax/ajax_like.php",
+                data: { user_id: user_id, post_id: post_id }
+            })
+                .done(function( res ) {
+                    if (res.status == "liked") {
+                        element.removeClass('like');
+                        element.addClass('unlike');
+                        element.css('background-image:', 'url(\'../images/loved.svg\')');
+                    } else {
+                        alert("oops");
+                    }
+                });
+            break;
+    }
+
+    e.preventDefault();
+});
+
 //update posts set flag = 0

@@ -10,6 +10,8 @@ if (!empty($_POST)){
     $newfilename = round(microtime(true)) . '.' . end($temp);
     $image = $newfilename;
 
+    $filter = $_POST['filter'];
+
     $description = $_POST['description'];
     $time = "";
     //$_POST['time'];
@@ -19,6 +21,7 @@ if (!empty($_POST)){
 
         $post = new Post();
         $post->setImage($image);
+        $post->setFilter($filter);
         $post->setDescription($description);
         $post->setUserId($user_id);
         $post->setTitle($title);
@@ -71,22 +74,58 @@ if (!empty($_POST)){
         <label for="upload-file">Image</label>
         <br>
         <div id="prev-div">
+            <figure class="<?php $_POST['filter'] ?>">
             <img id="img-prev" src="#" alt="uploaded image" />
+            </figure>
             <br>
         </div>
         <input type="file" name="upload_file"  accept="image/*" id="upload-file" onchange="readURL(this);">
+        <br>
+        <label for="upload-filter">Filter</label>
+        <br>
+        <select id="upload-filter" name="filter" placeholder="None" onchange="showFilter();">
+            <option value="#nofilter">None</option>
+            <option value="_1977">1977</option>
+            <option value="aden">Aden</option>
+            <option value="brannan">Brannan</option>
+            <option value="brooklyn">Brooklyn</option>
+            <option value="clarendon">Clarendon</option>
+            <option value="earlybird">Earlybird</option>
+            <option value="gingham">Gingham</option>
+            <option value="hudson">Hudson</option>
+            <option value="inkwell">Inkwell</option>
+            <option value="kelvin">Kelvin</option>
+            <option value="lark">Lark</option>
+            <option value="lofi">Lo-Fi</option>
+            <option value="maven">Maven</option>
+            <option value="mayfair">Mayfair</option>
+            <option value="moon">Moon</option>
+            <option value="nashville">Nashville</option>
+            <option value="perpetua">Perpetua</option>
+            <option value="reyes">Reyes</option>
+            <option value="rise">Rise</option>
+            <option value="slumber">Slumber</option>
+            <option value="stinson">Stinson</option>
+            <option value="toaster">Toaster</option>
+            <option value="valencia">Valencia</option>
+            <option value="walden">Walden</option>
+            <option value="willow">Willow</option>
+            <option value="xpro2">X-pro II</option>
+        </select>
         <br>
         <label for="upload-desc">Description</label>
         <br>
         <input type="text" name="description" placeholder="Description" id="upload-desc">
         <br>
+        <input type="text" hidden id="lng" name="lng"><input type="text" hidden id="lat" name="lat">
 
         <input type="submit" name="submit" value="Upload">
     </form>
+    <input type="text" id="error">
 </section>
 
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
-
+<script src="js/geolocation.js"></script>
 <script>
     $('#prev-div').hide();
     function readURL(input) {
@@ -102,6 +141,14 @@ if (!empty($_POST)){
             reader.readAsDataURL(input.files[0]);
         }
     }
+
+    getLocationName();
+
+    function showFilter() {
+        var x = document.getElementById("upload-filter").value;
+        document.getElementsByTagName("figure")[0].setAttribute("class", x);
+    }
+
 </script>
 
 

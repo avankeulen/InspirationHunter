@@ -53,7 +53,7 @@ class Follow {
         $followStatus = $this->getFollowStatus($followUserID);
         if($followStatus == "follow"){
             $conn = Db::getInstance();
-            $followCheck = $conn->prepare("insert into follow VALUES( NULL, :userID, :followUserID )");
+            $followCheck = $conn->prepare("insert into follow (userID, followUserID) VALUES( :userID, :followUserID )");
             $followCheck->bindValue(":userID", $userID);
             $followCheck->bindValue(":followUserID", $followUserID);
             $result = $followCheck->execute();
@@ -67,7 +67,7 @@ class Follow {
         
 
         if(!$result){
-            return "Er is een probleem opgetreden";
+            return "A problem has occured! Please try again.";
         }else{
             return "ok";
         }
