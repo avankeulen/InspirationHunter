@@ -3,20 +3,20 @@
 include_once ('classes/Like.class.php');
 include_once ('classes/Comment.class.php');
 
-$l = new Like();
-$likes = $l->getLikes();
 
-if (!empty($_GET['like'])) {
+if (!empty($_POST['like'])) {
     $l = new Like();
-    $l->setPostId($_GET['like']);
+    $l->setPostId($_POST['like']);
     $l->setUserId($_SESSION['user_id']);
     $l->likePost();
-} else if (!empty($_GET['unlike'])) {
+} elseif (!empty($_POST['unlike'])) {
     $l = new Like();
-    $l->setPostId($_GET['unlike']);
+    $l->setPostId($_POST['unlike']);
     $l->setUserId($_SESSION['user_id']);
     $l->unLikePost();
 }
+
+
 
 $filter = "";
 
@@ -78,16 +78,30 @@ if (!empty($_POST['flag'])) {
                 <h2><?php echo $row['title']; ?></h2>
                 <p><?php echo $row['description']; ?></p>
 
-                <?php if (isset($likes)):?>
-                    <a href="?like=<?php echo $row['id'];?>" class="like-post like">Like</a>
-                <?php endif; ?>
-                <?php foreach ($likes as $like): ?>
-                    <?php if ($like['post_id'] != $row['id']): ?>
-                        <a href="?like=<?php echo $row['id'];?>" class="like-post like">Like</a>
-                    <?php else: ?>
-                        <a href="?unlike=<?php echo $row['id'];?>" class="like-post unlike">Unlike</a>
-                    <?php endif; ?>
-                <?php endforeach; ?>
+
+
+
+
+                <!-- LIKES -->
+                <?php
+                    $likes = "";
+                    $l = new Like();
+                    $l->setUserId($_SESSION['user_id']);
+                    $l->setPostId($row['id']);
+                    $likes = $l->getLikes();
+                ?>
+
+                <form action="" method="post">
+                    <? if($likes['status'] == 1): ?>
+                        <input type="hidden" name="unlike" value="<?php echo $row['id'];?>"">
+                        <input type="submit" class="like-post unlike" data-id="<?php echo ($row['id']. "|" .$_SESSION['user_id']);?>">
+                    <? else: ?>
+                        <input type="hidden" name="like" value="<?php echo $row['id'];?>">
+                        <input type="submit" class="like-post like" data-id="<?php echo ($row['id']. "|" .$_SESSION['user_id']);?>">
+                    <? endif; ?>
+                </form>
+
+
 
 
                 <form action="" method="post" class="comment-form">

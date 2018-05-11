@@ -229,6 +229,8 @@ h1 {
     background-size: cover;
     background-repeat: no-repeat;
     margin-top: -35px;
+    border: none;
+    background-color: transparent;
 }
 .like {
     background-image: url('../images/love.svg');

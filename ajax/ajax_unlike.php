@@ -8,10 +8,10 @@ try {
 
     $l->setPostId($_POST['post_id']);
     $l->setUserId($_POST['user_id']);
-    $l->likePost();
+    $l->unLikePost();
 
     $feedback = [
-        'status' => 'liked'
+        'status' => 'unliked'
     ];
 
 } catch (Exception $e) {

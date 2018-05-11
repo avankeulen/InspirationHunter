@@ -43,9 +43,12 @@ class Like {
 
     public function getLikes() {
         $conn = Db::getInstance();
-        $statement = $conn->prepare('select * from likes');
+        //$statement = $conn->prepare('select * from likes l inner join posts p on l.post_id = p.id where l.user_id = :u');
+        $statement = $conn->prepare('select * from likes where user_id = :u and post_id = :p');
+        $statement->bindValue(":p", $this->post_id);
+        $statement->bindValue(":u", $this->user_id);
         $statement->execute();
-        $res = $statement->fetchAll(PDO::FETCH_ASSOC);
+        $res = $statement->fetch(PDO::FETCH_ASSOC);
         return $res;
     }
 
