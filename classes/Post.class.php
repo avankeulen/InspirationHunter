@@ -10,6 +10,7 @@ class Post {
     private $title;
     private $time;
     private $post_id;
+    private $city;
 
     public function postUsername() {
         $conn = Db::getInstance();
@@ -86,15 +87,25 @@ class Post {
         return $this->time;
     }
 
+    public function getCity()
+    {
+        return $this->city;
+    }
+    public function setCity($city)
+    {
+        $this->city = $city;
+    }
+
     public function SavePost() {
         $conn = Db::getInstance();
-        $statement = $conn->prepare("insert into posts (user_id, description, post_img, title, time_set, filter) VALUES (:id, :d, :p, :t, :ti, :f)");
+        $statement = $conn->prepare("insert into posts (user_id, description, post_img, title, time_set, filter, city) VALUES (:id, :d, :p, :t, :ti, :f, :c)");
         $statement->bindValue(":id", $this->getUserId());
         $statement->bindValue(":d", $this->getDescription());
         $statement->bindValue(":p", $this->getImage());
         $statement->bindValue(":t", $this->getTitle());
         $statement->bindValue(":ti", $this->getTime());
         $statement->bindValue(":f", $this->getFilter());
+        $statement->bindValue(":c", $this->getCity());
 
         if ($statement->execute()){
             return true;
