@@ -63,6 +63,21 @@ nav {
     color: #e74b4b;
 }
 
+#profile-a {
+    color: #ffffff;
+}
+#profile-b {
+    color: #ffffff;
+}
+
+#profile-a:hover {
+    color: grey;
+}
+
+#profile-b:hover {
+    color: grey;
+}
+
 #nav_logo {
     background-image: url('../images/logoWHITE.svg');
     background-repeat: no-repeat;
@@ -400,6 +415,7 @@ h1 {
     background-color: #E2B8B2;
 }
 
+
 @media only screen and (min-width: 760px) {
     .list {
         display: flex;
@@ -455,6 +471,12 @@ h1 {
         text-indent: -9999px;
         background-image: url('../images/avatar.svg');
     }
+
+    #profile-b {
+        text-indent: -9999px;
+        background-image: url('../images/look.svg');
+    }
+
     #search {
         width: 125px;
         margin-left: 10px;
