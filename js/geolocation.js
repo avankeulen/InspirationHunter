@@ -5,7 +5,7 @@ navigator.geolocation.getCurrentPosition(function(position) {
 
   function getLocationName() {
         var link = "https://maps.googleapis.com/maps/api/geocode/json?latlng=" + "40.714224" + "," + "-73.961452" + "&";
-
+        console.log(link);
         window.jQuery.ajax({
             url: link,
             dataType: "json",
