@@ -226,10 +226,17 @@ h1 {
     width: 30px;
     height: 30px;
     text-indent: -9999px;
-    background-image: url('../images/love.svg');
     background-size: cover;
     background-repeat: no-repeat;
     margin-top: -35px;
+    border: none;
+    background-color: transparent;
+}
+.like {
+    background-image: url('../images/love.svg');
+}
+.unlike {
+    background-image: url('../images/loved.svg');
 }
 
 .show-posts {

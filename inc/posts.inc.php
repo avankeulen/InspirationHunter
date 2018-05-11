@@ -1,15 +1,35 @@
 <?php
 
 include_once ('classes/Like.class.php');
+include_once ('classes/Comment.class.php');
 
-if (!empty($_GET['like'])) {
+
+if (!empty($_POST['like'])) {
     $l = new Like();
-    $l->setPostId($_GET['like']);
+    $l->setPostId($_POST['like']);
     $l->setUserId($_SESSION['user_id']);
     $l->likePost();
+} elseif (!empty($_POST['unlike'])) {
+    $l = new Like();
+    $l->setPostId($_POST['unlike']);
+    $l->setUserId($_SESSION['user_id']);
+    $l->unLikePost();
 }
 
+
+
 $filter = "";
+
+// Loop comments in PHP
+$comment = new Comment();
+$allComments = $comment->GetComments();
+rsort($allComments);
+
+if (!empty($_POST['flag'])) {
+    $flag = new Post();
+    $flag->setPostId($_POST['flag']);
+    $flag->flag_post();
+}
 
 ?>
 
@@ -57,8 +77,31 @@ $filter = "";
                 </div>
                 <h2><?php echo $row['title']; ?></h2>
                 <p><?php echo $row['description']; ?></p>
-                
-                <a href="?like=<?php echo $row['id'];?>" class="like-post">Like</a>
+
+
+
+
+
+                <!-- LIKES -->
+                <?php
+                    $likes = "";
+                    $l = new Like();
+                    $l->setUserId($_SESSION['user_id']);
+                    $l->setPostId($row['id']);
+                    $likes = $l->getLikes();
+                ?>
+
+                <form action="" method="post">
+                    <? if($likes['status'] == 1): ?>
+                        <input type="hidden" name="unlike" value="<?php echo $row['id'];?>"">
+                        <input type="submit" class="like-post unlike" data-id="<?php echo ($row['id']. "|" .$_SESSION['user_id']);?>">
+                    <? else: ?>
+                        <input type="hidden" name="like" value="<?php echo $row['id'];?>">
+                        <input type="submit" class="like-post like" data-id="<?php echo ($row['id']. "|" .$_SESSION['user_id']);?>">
+                    <? endif; ?>
+                </form>
+
+
 
 
                 <form action="" method="post" class="comment-form">
