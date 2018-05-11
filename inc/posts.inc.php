@@ -122,6 +122,13 @@ if (!empty($_POST['flag'])) {
                     <?php endforeach; ?>
                 </ul>
 
+                <? if ($row['user_id'] == $_SESSION['user_id']): ?>
+                <form action="" method="post">
+                    <input type="hidden" name="id" value="<?php echo $row['id']; ?>">
+                    <input id="btnDelete" type="submit" name="delete" value="Delete" />
+                </form>
+                <? endif; ?>
+
             </li>
 
         <?php endif; ?>
