@@ -70,7 +70,7 @@ if (!empty($_POST['comment'])){
 <?php include_once ('inc/nav.inc.php'); ?>
 
 <section class="content">
-    <h1> ACCOUNT </h1>
+
 
     <?php
 
@@ -85,30 +85,30 @@ if (!empty($_POST['comment'])){
         $posts = $post->getCustomPosts($g_userID);
 
     ?>
+
+    <h1> <?php echo $userDetails['username']?> </h1>
+    <img class="profilepic" src="images/uploads/avatar/<? echo $userDetails['user_img'];?>" style="height: 200px;" alt="Profilepic">
    
     <?php
     if($g_userID != $user_id){ ?>
         <a id="btnFollow" href="javascript: followUser();"></a>
     <?php } ?>
 
-    <?php
-    if($g_userID == $user_id){ ?>
-    <a href="settings.php" id="button-regular">Edit</a>
+    <?php if($g_userID == $user_id){ ?>
+        <a href="settings.php" id="button-regular">Edit</a>
     <?php } ?>
 
     <section class="login-form-wrap2">
 
-        <img class="profilepic" src="img.php?id=<?php echo $g_userID; ?>" alt="" style="height: 200px;" alt="Profilepic">
+
 
         <div class="accountanddiscription">
-            <h3 style="color: grey;">profile</h3>
-            <h1 style="font-size: 1.8em; color: grey; margin: 20px 0px 0px 0px;" class="accountname"><?php echo $userDetails['username']?></h1>
             <h1 style="font-size: 1.3em; color: grey; margin: 20px 0px 0px 0px; font-weight: 10;"  class="bio">Bio: <?php echo $userDetails['bio'] ?></h1>
 
         </div>
 
 
-<h1 style="font-size: 1.5em;"> MY POSTS </h1>
+<h1 style="font-size: 1.5em;"> <?if($g_userID == $user_id){?>MY<?}?> POSTS </h1>
 
 
         <?php include_once ('inc/posts.inc.php'); ?>
