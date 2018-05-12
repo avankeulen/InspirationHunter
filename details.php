@@ -27,37 +27,38 @@ $ex=new GetMostCommonColors();
 <body>
 
 <?php include_once ('inc/nav.inc.php'); ?>
-  
-<?php foreach( $result as $result ): ?>
-    <?php echo $result["user_id"];
-    echo "<br>";
-    echo $result["title"];
-    echo "<br>";
-    echo $result["description"];
-    echo "<br>";?>
-    <img src="<?php echo 'images/uploads/'.$result['post_img'] ?>" alt="post_img" width="150px" height="auto">
-    <?php $colors=$ex->Get_Color('images/uploads/'.$result['post_img'], $num_results, $reduce_brightness, $reduce_gradients, $delta);
-?>
-    
-<?php endforeach ?>
+
+<section class="content">
+    <?php foreach( $result as $result ): ?>
+        <?php echo $result["user_id"];
+        echo "<br>";
+        echo $result["title"];
+        echo "<br>";
+        echo $result["description"];
+        echo "<br>";?>
+        <img src="<?php echo 'images/uploads/'.$result['post_img'] ?>" alt="post_img" width="150px" height="auto">
+        <?php $colors=$ex->Get_Color('images/uploads/'.$result['post_img'], $num_results, $reduce_brightness, $reduce_gradients, $delta);
+    ?>
+
+    <?php endforeach ?>
 
 
-<div id="wrap">
+    <div id="wrap">
 
-<table>
-<tr><td>Color</td><td>Color Code</td><td>Percentage</td><td rowspan="<?php echo (($num_results > 0)?($num_results+1):22500);?>"></td></tr>
-<?php
-foreach ( $colors as $hex => $count )
-{
-	if ( $count > 0 )
-	{
-		echo "<tr><td style=\"background-color:#".$hex.";\"></td><td>".$hex."</td><td>$count</td></tr>";
-	}
-}
-?>
-</table>
+    <table>
+    <tr><td>Color</td><td>Color Code</td><td>Percentage</td><td rowspan="<?php echo (($num_results > 0)?($num_results+1):22500);?>"></td></tr>
+    <?php
+    foreach ( $colors as $hex => $count )
+    {
+        if ( $count > 0 )
+        {
+            echo "<tr><td style=\"background-color:#".$hex.";\"></td><td>".$hex."</td><td>$count</td></tr>";
+        }
+    }
+    ?>
+    </table>
 
-</div>
-
+    </div>
+</section>
 </body>
 </html>

@@ -25,6 +25,19 @@ $comment = new Comment();
 $allComments = $comment->GetComments();
 rsort($allComments);
 
+// Place a comment in PHP
+if (!empty($_POST['comment'])){
+    $comment = $_POST['comment'];
+    $post_id = $_POST['post_id'];
+
+    $c = new Comment();
+    $c->setUserId($user_id);
+    $c->setPostId($post_id);
+    $c->setUsername($_SESSION['username']);
+    $c->setComment($comment);
+    $c->PlaceComment();
+}
+
 if (!empty($_POST['flag'])) {
     $flag = new Post();
     $flag->setPostId($_POST['flag']);
@@ -34,6 +47,9 @@ if (!empty($_POST['flag'])) {
 ?>
 
 <ul class="list">
+    <? if ($posts->rowCount() < 1) { ?>
+        <p>No Posts to see here...</p>
+    <? } else { ?>
     <?php while($row = $posts->fetch()) : ?>
         <?php if ($row['flag'] < 3): ?>
 
@@ -131,6 +147,7 @@ if (!empty($_POST['flag'])) {
 
         <?php endif; ?>
     <?php endwhile; ?>
+    <? } ?>
 </ul>
 
 <button class="show-posts">Show more</button>

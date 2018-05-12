@@ -31,19 +31,6 @@ if (!empty($_GET['search'])) {
     $result = $test->_Search();
 }
 
-// Place a comment in PHP
-if (!empty($_POST['comment'])){
-    $comment = $_POST['comment'];
-    $post_id = $_POST['post_id'];
-
-    $c = new Comment();
-    $c->setUserId($user_id);
-    $c->setPostId($post_id);
-    $c->setUsername($_SESSION['username']);
-    $c->setComment($comment);
-    $c->PlaceComment();
-}
-
 
 
 ?><!doctype html>
@@ -76,9 +63,13 @@ if (!empty($_POST['comment'])){
         </ul>
     </div>
 
-    <?php if (isset($result)): ?>
-        <?php include_once ('inc/search.inc.php'); ?>
-    <?php endif; ?>
+    <?php if (isset($result)) { ?>
+        <? if (count($result) != 0) {?>
+            <?php include_once ('inc/search.inc.php'); ?>
+        <? } else { ?>
+            <p>No search results... try again...</p>
+        <? } ?>
+    <?php } ?>
 
     <?php if (!isset($result)): ?>
         <h3 style="font-weight:700; font-size:1.3em;">Your feed</h3>
