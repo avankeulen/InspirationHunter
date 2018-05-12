@@ -35,8 +35,8 @@ $ex=new GetMostCommonColors();
     echo "<br>";
     echo $result["description"];
     echo "<br>";?>
-    <img src="<?php echo 'images/'.$result['post_img'] ?>" alt="post_img" width="150px" height="auto">
-    <?php $colors=$ex->Get_Color('images/'.$result['post_img'], $num_results, $reduce_brightness, $reduce_gradients, $delta);
+    <img src="<?php echo 'images/uploads/'.$result['post_img'] ?>" alt="post_img" width="150px" height="auto">
+    <?php $colors=$ex->Get_Color('images/uploads/'.$result['post_img'], $num_results, $reduce_brightness, $reduce_gradients, $delta);
 ?>
     
 <?php endforeach ?>
