@@ -85,9 +85,11 @@ if (!empty($_POST['flag'])) {
                 <div id="img-div">
                     
                     <!--<a alt="post_img" href="detail.php?watch=" style="background-image: <?php //echo 'images/uploads/'. $row['post-img']; ?> ")></a>-->
-                    <figure class="<?php echo $row['filter'] ?>">
-                    <img src="<?php echo 'images/uploads/'.$row['post_img']; ?>" alt="post_img" width="50px" height="auto">
-                    </figure>
+                    <a href="details.php?watch=<?echo $row['id'];?>">
+                        <figure class="<?php echo $row['filter'] ?>">
+                            <img src="<?php echo 'images/uploads/'.$row['post_img']; ?>" alt="post_img" width="50px" height="auto">
+                        </figure>
+                    </a>
                 </div>
                 <h2><?php echo $row['title']; ?></h2>
                 <p><?php echo $row['description']; ?></p>
@@ -107,7 +109,7 @@ if (!empty($_POST['flag'])) {
 
                 <form action="" method="post">
                     <? if($likes['status'] == 1): ?>
-                        <input type="hidden" name="unlike" value="<?php echo $row['id'];?>"">
+                        <input type="hidden" name="unlike" value="<?php echo $row['id'];?>">
                         <input type="submit" class="like-post unlike" data-id="<?php echo ($row['id']. "|" .$_SESSION['user_id']);?>">
                     <? else: ?>
                         <input type="hidden" name="like" value="<?php echo $row['id'];?>">

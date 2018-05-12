@@ -115,6 +115,7 @@ if (!empty($_POST)){
             <option value="xpro2">X-pro II</option>
         </select>
         <br>
+        <br>
         <label for="upload-desc">Description</label>
         <br>
         <input type="text" name="description" placeholder="Description" id="upload-desc">
