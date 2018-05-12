@@ -131,8 +131,8 @@ if (!empty($_POST['flag'])) {
                     <?php foreach ($allComments as $c): ?>
                         <?php if ($c['post_id'] == $row['id']): ?>
                             <li class="comment-li" >
-                                <strong><?php echo $c['username']; ?> </strong>
-                                <p><?php echo $c['comment']; ?></p>
+                                <strong><?php echo htmlspecialchars($c['username']); ?> </strong>
+                                <p><?php echo htmlspecialchars($c['comment']); ?></p>
                             </li>
                         <?php endif; ?>
                     <?php endforeach; ?>
