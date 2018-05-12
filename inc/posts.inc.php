@@ -47,9 +47,7 @@ if (!empty($_POST['flag'])) {
                             <br><p id="time-set"><?php echo $row['time_set']; ?></p>
                    
                               <p class="locationName"><?php 
-                               // $adress = $functie("lng", "lat");
-                               // echo $adress['city'];
-                            
+                               echo $row['city'];
                             ?></p>
                      
 

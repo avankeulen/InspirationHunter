@@ -5,6 +5,7 @@
 if (!empty($_POST)){
     $title = $_POST['title'];
     $image = $_FILES['upload_file']['name'];
+    $city = htmlspecialchars($_POST['city']);
 
     $temp = explode(".", $_FILES['upload_file']['name']);
     $newfilename = round(microtime(true)) . '.' . end($temp);
@@ -26,6 +27,7 @@ if (!empty($_POST)){
         $post->setUserId($user_id);
         $post->setTitle($title);
         $post->setTime($time);
+        $post->setCity($city);
 
         define ('SITE_ROOT', realpath(dirname(__FILE__)));
 
@@ -117,7 +119,7 @@ if (!empty($_POST)){
         <br>
         <input type="text" name="description" placeholder="Description" id="upload-desc">
         <br>
-        <input type="text" hidden id="lng" name="lng"><input type="text" hidden id="lat" name="lat">
+        <input type="hidden" id="city" name="city" value="unknown location" />
 
         <input type="submit" name="submit" value="Upload">
     </form>
@@ -125,7 +127,6 @@ if (!empty($_POST)){
 </section>
 
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
-<script src="js/geolocation.js"></script>
 <script>
     $('#prev-div').hide();
     function readURL(input) {
@@ -142,12 +143,51 @@ if (!empty($_POST)){
         }
     }
 
-    getLocationName();
+    // getLocationName();
 
     function showFilter() {
         var x = document.getElementById("upload-filter").value;
         document.getElementsByTagName("figure")[0].setAttribute("class", x);
     }
+
+</script>
+<script language="javascript" type="text/javascript">
+
+var loc = document.getElementById("city");
+var url = "";
+var lat = "";
+var lon = "";
+
+function getLocation() {
+	if (navigator.geolocation) {
+        navigator.geolocation.getCurrentPosition(showPosition);
+    } else {
+        loc.innerHTML = "Geolocation is not supported by this browser.";
+    }
+}
+function showPosition(position) {
+    lat = position.coords.latitude; 
+    lon = position.coords.longitude;
+
+    getCityFromPosition(lat, lon);
+}
+
+function getCityFromPosition(lat, lon){
+    url = "https://maps.googleapis.com/maps/api/geocode/json?latlng=" + lat + "," + lon + "&sensor=false&key=AIzaSyCVvQeila2uW_EHtmzE3Ol34HH5XWyXc7A";
+
+    window.jQuery.ajax({
+        url: url,
+        dataType: "json",
+        success: function (data) {
+            loc.value = data.results[0].address_components[2].long_name;
+        }
+    });
+}
+
+$( document ).ready(function() {
+	getLocation();
+});
+
 
 </script>
 
