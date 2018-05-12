@@ -71,7 +71,7 @@ if( $statement->rowCount() > 0){
 <h1> Edit account:  </h1>
 
 <div style="margin:20px 10px 10px 10px; padding:25px;border-radius:7px;background-color:rgba(93,180,205,0.25);box-shadow: 0 2px 3px rgba(0,0,0,.16);color:#0781ad;border:solid 1px #0781ad;opacity:0.66;">
-    Warning: Editing your account will require us to automatically log you in again! 
+    Warning: For security reasons, editing your account details will require you to log in again. 
 </div>
 
     <section class="login-form-wrap3">
@@ -84,7 +84,8 @@ if( $statement->rowCount() > 0){
                 <input class="textbox" type="text" name="bio" value=<?php echo $user['bio'] ?> >
             </label><br />
 
-            <label for="profilePicture">Mijn profielfoto</label>
+            <label for="profilePicture">My Profile Picture</label>
+            <br>
             <div id="prev-div">
                 <figure class="<?php $_POST['filter'] ?>">
                     <img id="img-prev" src="#" alt="uploaded image" />
@@ -92,16 +93,15 @@ if( $statement->rowCount() > 0){
                 <br>
             </div>
             <input type="file" name="profilePicture" id="profilePicture" accept="image/gif, image/jpeg, image/png, image/jpg" onchange="readURL(this);"><br />
-
-
-
             <img id="imgPreview" src="img.php" alt="" style="height: 200px;" />
-            </label><br />
+            <br>
 
-            <label>New password: 
-                <input class="textbox" type="password" name="newPassword" placeholder="New Password">
-            </label><br /><br />
-            <input class="buttonReset" type="submit" value="Pas gegevens aan">
+            <label>New password:</label> 
+            <br>
+            <input class="textbox" type="password" name="newPassword" placeholder="">
+            <br>
+            <br>
+            <input class="buttonReset" type="submit" value="Submit">
         </form>
     </section>
 

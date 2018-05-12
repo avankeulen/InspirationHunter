@@ -61,7 +61,8 @@ if (!empty($_POST['comment'])){
 <head>
     <meta charset="UTF-8">
     <title>InspirationHunter Profile Page</title>
-    <?php include_once ('inc/head.inc.php'); ?>    
+    <?php include_once ('inc/head.inc.php'); ?>  
+    <link rel="stylesheet" href="css/profile.css">  
 
 
 </head>
@@ -69,7 +70,7 @@ if (!empty($_POST['comment'])){
 
 <?php include_once ('inc/nav.inc.php'); ?>
 
-<section class="content">
+
 
 
     <?php
@@ -86,17 +87,32 @@ if (!empty($_POST['comment'])){
 
     ?>
 
-    <h1> <?php echo $userDetails['username']?> </h1>
-    <img class="profilepic" src="images/uploads/avatar/<? echo $userDetails['user_img'];?>" style="height: 200px;" alt="Profilepic">
-   
-    <?php
-    if($g_userID != $user_id){ ?>
-        <a id="btnFollow" href="javascript: followUser();"></a>
-    <?php } ?>
+       
+    
+    <div class="user-info">
+        <section class="content">
+            <h1> <?php echo $userDetails['username']?> </h1>
 
-    <?php if($g_userID == $user_id){ ?>
-        <a href="settings.php" id="button-regular">Edit</a>
-    <?php } ?>
+            <div id="profilepic-holder" style="border-radius: 100px; overflow: hidden; width: 200px; height: 200px;">
+                <img class="profilepic" src="images/uploads/avatar/<? echo $userDetails['user_img'];?>" style="width: 200px" alt="Profilepic">
+            </div>
+            
+            <?php if($g_userID == $user_id){ ?>
+                <a href="settings.php" id="button-regular" class="edit-btn">Edit</a>
+            <?php } ?>
+
+            <?php if($g_userID != $user_id){ ?>
+                <a id="btnFollow" href="javascript: followUser();"></a>
+            <?php } ?>
+            
+        </section>
+    </div>
+    
+<section class="content">
+    
+    
+   
+    
 
     <section class="login-form-wrap2">
 

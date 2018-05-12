@@ -52,10 +52,10 @@ class Comment {
     public function PlaceComment() {
         $conn = Db::getInstance();
         $statement = $conn->prepare("insert into comments (user_id, username, post_id, comment) values (:u, :un, :p,:c );");
-        $statement->bindValue(':u', $this->getUserId());
-        $statement->bindValue(':un', $this->getUsername());
-        $statement->bindValue(':p', $this->getPostId());
-        $statement->bindValue(':c', $this->getComment());
+        $statement->bindValue(':u', $this->user_id);
+        $statement->bindValue(':un', $this->username);
+        $statement->bindValue(':p', $this->post_id);
+        $statement->bindValue(':c', $this->comment);
         $statement->execute();
     }
 

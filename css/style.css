@@ -24,6 +24,7 @@ header {
     padding-top: 10px;
     position: fixed;
     font-size: 1.3em;
+    z-index: 100;
     box-shadow: 0 2px 4px -1px rgba(0,0,0,0.25);
     -moz-box-shadow: 0 2px 4px -1px rgba(0,0,0,0.25);
     -webkit-box-shadow: 0 2px 4px -1px rgba(0,0,0,0.25);
@@ -113,6 +114,7 @@ h1 {
     margin-bottom: 20px;
     font-weight: 700;
 }
+
 #welcome {
     font-weight: 400;
 }
@@ -125,7 +127,6 @@ h1 {
     white-space: nowrap;
     padding: 10px;
     margin-bottom: 20px;
-    width: 100%;
 }
 #user-list-item {
     display: inline-block;
@@ -186,9 +187,21 @@ h1 {
     overflow: hidden;
 }
 .post #img-div a {
-    width: 100%;
-    height: 100%;
-    background-size: cover;
+    width: 300px;
+    height: 300px;
+    overflow: hidden;
+    
+    /*display: flex;
+    justify-content: center;
+    align-items: center;*/
+}
+.post #img-div a img {
+    /*min-width: 100%;
+    min-height: 100%;*/
+    
+    object-fit: cover;
+    width: 300px;
+    height: 300px;
 }
 
 .post #user-link {
@@ -372,13 +385,14 @@ h1 {
 #button-regular{
     background-color: #b0cbbd;
     border: none;
+    border-radius: 5px;
     color: white;
-    padding: 5px;
+    padding: 10px;
     font-size: 1.3em;
     margin-bottom: 0;
     width: 100px;
     text-decoration: none; 
-    box-shadow:inset 0 -0.6em 1em -0.35em rgba(0,0,0,0.17),inset 0 0.6em 2em -0.3em rgba(255,255,255,0.15),inset 0 0 0em 0.05em rgba(255,255,255,0.12);
+    /*box-shadow:inset 0 -0.6em 1em -0.35em rgba(0,0,0,0.17),inset 0 0.6em 2em -0.3em rgba(255,255,255,0.15),inset 0 0 0em 0.05em rgba(255,255,255,0.12);*/
 }
 
 #button-regular:hover{
@@ -386,15 +400,18 @@ h1 {
 }
 
 #btnFollow{
-    background-color: #E2B8B2;
+    background-color: /*#E2B8B2*/#89cff0;
     border: none;
+    border-radius: 5px;
+    float: right;
+    text-align: center;
     color: white;
-    padding: 5px;
+    padding: 10px;
     font-size: 1.3em;
     margin-bottom: 0;
     width: 100px;
     text-decoration: none;
-    box-shadow:inset 0 -0.6em 1em -0.35em rgba(0,0,0,0.17),inset 0 0.6em 2em -0.3em rgba(255,255,255,0.15),inset 0 0 0em 0.05em rgba(255,255,255,0.12);
+    /*box-shadow:inset 0 -0.6em 1em -0.35em rgba(0,0,0,0.17),inset 0 0.6em 2em -0.3em rgba(255,255,255,0.15),inset 0 0 0em 0.05em rgba(255,255,255,0.12);*/
 }
 
 #btnFollow:hover{
@@ -404,15 +421,31 @@ h1 {
 #btnDelete{
     background-color: #e74b4b;
     border: none;
+    border-radius: 5px;
     color: white;
     padding: 5px;
-    font-size: 1.3em;
+    font-size: 1em;
     margin-bottom: 0;
-    width: 100px;
+    width: 75px;
 }
 
 #btnDelete:hover{
     background-color: #E2B8B2;
+}
+
+.edit-btn {
+    float: right;
+    text-align: center;
+}
+
+.user-info {
+    width: 100%;
+    height: 350px;
+    background-image: url(../images/uploads/background/default_bg.jpg);
+    background-repeat: no-repeat;
+    background-size: cover;
+    background-position: bottom;
+    background-attachment: fixed;
 }
 
 
@@ -429,6 +462,15 @@ h1 {
     }
     h1 {
         text-align: left;
+    }
+    
+    .user-info h1 {
+        margin-left: 225px;
+        font-size: 3em;
+        margin-top: 100px;
+        margin-bottom: -50px;
+        color: white;
+        text-shadow: 0px 1px 10px #333;
     }
 }
 
@@ -478,11 +520,33 @@ h1 {
     }
 
     #search {
-        width: 125px;
+        width: 100px;
         margin-left: 10px;
     }
-
-    
+    .user-info h1 {
+        color: white;
+        padding-top: 20px;
+        font-size: 3em;
+        text-shadow: 0px 1px 10px #333;
+    }
+    #profilepic-holder {
+        display: block;
+        margin-left: auto;
+        margin-right: auto;
+        margin-bottom: 20px;
+    }
+    .edit-btn {
+        float: none;
+        display: block;
+        margin-left: auto;
+        margin-right: auto;
+    }
+    #btnFollow {
+        float: none;
+        display: block;
+        margin-left: auto;
+        margin-right: auto;
+    }
 
     
 }
