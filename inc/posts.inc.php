@@ -42,6 +42,7 @@ if (!empty($_POST['flag'])) {
     $flag->flag_post();
 }
 
+
 ?>
 
 <ul class="list">
@@ -64,7 +65,7 @@ if (!empty($_POST['flag'])) {
                     <?php endforeach; ?>
                 </a>
 
-                <p class="locationName"><?php echo $row['city']; ?></p>
+                <a class="locationName" href="locationdetail.php?city=<?php echo $row['city']; ?>"><? echo $row['city']; ?></a>
 
                 <form action="" method="post" id="flag">
                     <a href="#">

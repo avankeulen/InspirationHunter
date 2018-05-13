@@ -165,6 +165,14 @@ class Post {
         return $statement;
     }
 
+    public function getLocationDetails(){
+        $conn = Db::getInstance();      
+        $statement = $conn->prepare("select * from posts where city = :loc");
+        $statement->bindValue(":loc", $this->city);
+        $statement->execute();
+        return $statement;
+    }
+
 
 
 }

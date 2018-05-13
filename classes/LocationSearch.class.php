@@ -2,33 +2,33 @@
 
 include_once ('Db.class.php');
 
-class LocationSearch {
-    protected $search_term;
+class LocationName {
+    private $location_name;
 
-    public function getSearchTerm()
+    public function getLocationName()
     {
-        return $this->search_term;
+        return $this->location_name;
     }
-    public function setSearchTerm($search_term)
+    public function setLocationName($location_name)
     {
-        $this->search_term = $search_term;
+        $this->location_name = $location_name;
     }
 
-    public function _Search() {
+    public function _LocationName() {
         $conn = Db::getInstance();
-        $search = $this->getSearchTerm();
-        $search = "%$search%";
+        $name = $this->getLocationName();
+        $name = "%$name%";
 
         $stmt = $conn->prepare("select * from posts WHERE city LIKE :s");
-        $stmt->bindValue(":s", $search);
+        $stmt->bindValue(":s", $name);
         $stmt->execute();
 
-        $result = array();
+        $nameresult = array();
 
         while ($row = $stmt->fetch(PDO::FETCH_ASSOC)) {
-            $result[] = $row;
+            $nameresult[] = $row;
         }
 
-        return $result;
+        return $nameresult;
     }
 }
