@@ -59,12 +59,12 @@ if (!empty($_POST['flag'])) {
                             <div id="user-img-div"><img src="images/uploads/avatar/<?php echo $u['user_img']; ?>" alt=""></div>
                             <h3><?php echo htmlspecialchars($u['username']); ?></h3>
                             <br><p id="time-set"><?php echo $row['time_set']; ?></p>
-                   
-                            <p class="locationName"><?php echo $row['city']; ?></p>
 
                         <?php endif; ?>
                     <?php endforeach; ?>
                 </a>
+
+                <p class="locationName"><?php echo $row['city']; ?></p>
 
                 <form action="" method="post" id="flag">
                     <a href="#">
