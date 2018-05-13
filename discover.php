@@ -7,6 +7,20 @@ include_once ('classes/Comment.class.php');
 $a = new User();
 $allUsers = $a->getAllUsers();
 
+$post = new Post();
+$posts = $post->getEveryPost();
+
+$getUsername = new Post();
+$username = $getUsername->postUsername();
+
+if (!empty($_GET['locationsearch'])) {
+    include_once ('classes/LocationSearch.class.php');
+    $search_term = $_GET['locationsearch'];
+    $test = new LocationSearch();
+    $test->setSearchTerm($search_term);
+    $result = $test->_Search();
+}
+
 ?><!doctype html>
 <html lang="en">
 <head>
@@ -54,9 +68,12 @@ $allUsers = $a->getAllUsers();
     <h3 style="font-weight:700; font-size:1.3em; margin-top: 1.3em;">You might like this posts</h3>
     <?php endif; ?>
 
+ <form action="" method="get">
+                    <input type="text" name="locationsearch" placeholder="Search" id="locationsearch">
+            </form>
   
 
-    <?php // include_once ('inc/posts.inc.php');?>
+    <?php include_once ('inc/posts.inc.php');?>
   
     
 </section>
