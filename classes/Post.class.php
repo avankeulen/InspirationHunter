@@ -112,7 +112,6 @@ class Post {
         } else {
             return false;
         }
-
     }
     
     public function getAllPosts($user_id){
@@ -128,6 +127,15 @@ class Post {
         $statement = $conn->prepare("select * from posts where user_id = '".$user_id."'");
         $statement->execute();
         return $statement;
+    }
+
+    public function getPostDetails() {
+        $conn = Db::getInstance();
+        $statement = $conn->prepare("select * from posts p inner join users u on p.user_id = u.id where id = :id");
+        $statement->bindValue(":id", $_GET['watch']);
+        $statement->execute();
+        $res = $statement->fetchObject();
+        return $res;
     }
 
 

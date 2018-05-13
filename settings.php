@@ -9,20 +9,25 @@ if (!isset($_SESSION['username'])) {
     header('location: login.php');
 }
 if(!empty($_POST)){
-    $fotonaam = $_FILES['profilePicture']['tmp_name'];
-    $foto = file_get_contents($fotonaam);
-    
+
     $u = new User();
     // $u->Password= $_POST['oldPassword'];
     $username = $_SESSION['username'];
     $newusername = $_POST['username'];
     $bio = $_POST['bio'];
 
+    $user_img = "";
+    $destFile = "";
+
+    $fotonaam = $_FILES['profilePicture']['tmp_name'];
+    if (!empty($fotonaam)) {$foto = file_get_contents($fotonaam);}
+
     $temp = explode(".", $_FILES['profilePicture']['name']);
     $newfilename = round(microtime(true)) . '.' . end($temp);
     $foto = $newfilename;
 
     $user_img = $foto;
+
     $newpassword = "";
     if(!empty($_POST['newPassword'])) {
         $newpassword = $_POST['newPassword'];
@@ -33,9 +38,11 @@ if(!empty($_POST)){
     $result = $u->changeSettings($username, $newusername, $bio, $user_img, $newpassword);
     if($result === true){
 
-        $destFile = __DIR__ . '/images/uploads/avatar/' . $user_img;
-        move_uploaded_file($_FILES['profilePicture']['tmp_name'], $destFile);
-        chmod($destFile, 0666);
+        if ($fotonaam != NULL){
+            $destFile = __DIR__ . '/images/uploads/avatar/' . $user_img;
+            move_uploaded_file($_FILES['profilePicture']['tmp_name'], $destFile);
+            chmod($destFile, 0666);
+        }
 
         //echo "De gegevens zijn succesvol aangepast, gelieve terug in te loggen met de nieuwe gegevens";
         session_destroy();

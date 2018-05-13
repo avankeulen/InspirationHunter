@@ -96,6 +96,10 @@ if (!empty($_POST['comment'])){
             <div id="profilepic-holder" style="border-radius: 100px; overflow: hidden; width: 200px; height: 200px;">
                 <img class="profilepic" src="images/uploads/avatar/<? echo $userDetails['user_img'];?>" style="width: 200px" alt="Profilepic">
             </div>
+
+            <div class="accountanddiscription">
+                <h1 style="font-size: 1.3em; color: grey; margin: 20px 0px 0px 0px; font-weight: 10; color: whitesmoke;"  class="bio"><span style="color: darkgray;">Bio:</span> <?php echo $userDetails['bio'] ?></h1>
+            </div>
             
             <?php if($g_userID == $user_id){ ?>
                 <a href="settings.php" id="button-regular" class="edit-btn">Edit</a>
@@ -109,31 +113,13 @@ if (!empty($_POST['comment'])){
     </div>
     
 <section class="content">
-    
-    
-   
-    
-
     <section class="login-form-wrap2">
-
-
-
-        <div class="accountanddiscription">
-            <h1 style="font-size: 1.3em; color: grey; margin: 20px 0px 0px 0px; font-weight: 10;"  class="bio">Bio: <?php echo $userDetails['bio'] ?></h1>
-
-        </div>
-
-
-<h1 style="font-size: 1.5em;"> <?if($g_userID == $user_id){?>MY<?}?> POSTS </h1>
-
-
+        <h1 style="font-size: 1.5em;"> <?if($g_userID == $user_id){?>MY<?}?> POSTS </h1>
         <?php include_once ('inc/posts.inc.php'); ?>
-
-
     </section>
 </section>
 
-<script   src="https://code.jquery.com/jquery-3.3.1.min.js"   integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8="   crossorigin="anonymous"></script>
+<script src="https://code.jquery.com/jquery-3.3.1.min.js" integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8=" crossorigin="anonymous"></script>
 
 <script>
     function getFollowStatus(followUserID) {

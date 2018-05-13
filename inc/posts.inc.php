@@ -16,8 +16,6 @@ if (!empty($_POST['like'])) {
     $l->unLikePost();
 }
 
-
-
 $filter = "";
 
 // Loop comments in PHP
@@ -59,17 +57,13 @@ if (!empty($_POST['flag'])) {
                     <?php foreach ($username as $u): ?>
                         <?php if ($row['user_id'] == $u['id']):?>
                             <div id="user-img-div"><img src="images/uploads/avatar/<?php echo $u['user_img']; ?>" alt=""></div>
-                            <h3><?php echo $u['username']; ?></h3>
+                            <h3><?php echo htmlspecialchars($u['username']); ?></h3>
                             <br><p id="time-set"><?php echo $row['time_set']; ?></p>
                    
-                              <p class="locationName"><?php 
-                               echo $row['city'];
-                            ?></p>
-                     
+                            <p class="locationName"><?php echo $row['city']; ?></p>
 
                         <?php endif; ?>
                     <?php endforeach; ?>
-
                 </a>
 
                 <form action="" method="post" id="flag">
@@ -79,20 +73,18 @@ if (!empty($_POST['flag'])) {
                     </a>
                 </form>
 
-                <p class="flag-p">This post has been flagged: <strong class="flag-count"><?php echo $row['flag']; ?></strong> time<?php if ($row['flag'] != 1): ?><span class="s">s</span><?php endif; ?></p>
+                <p class="flag-p">This post has been flagged: <strong class="flag-count"><?php echo htmlspecialchars($row['flag']); ?></strong> time<?php if ($row['flag'] != 1): ?><span class="s">s</span><?php endif; ?></p>
 
 
                 <div id="img-div">
-                    
-                    <!--<a alt="post_img" href="detail.php?watch=" style="background-image: <?php //echo 'images/uploads/'. $row['post-img']; ?> ")></a>-->
                     <a href="details.php?watch=<?echo $row['id'];?>">
                         <figure class="<?php echo $row['filter'] ?>">
                             <img src="<?php echo 'images/uploads/'.$row['post_img']; ?>" alt="post_img" width="50px" height="auto">
                         </figure>
                     </a>
                 </div>
-                <h2><?php echo $row['title']; ?></h2>
-                <p><?php echo $row['description']; ?></p>
+                <h2><?php echo htmlspecialchars($row['title']); ?></h2>
+                <p><?php echo htmlspecialchars($row['description']); ?></p>
 
 
 
@@ -107,7 +99,7 @@ if (!empty($_POST['flag'])) {
                     $likes = $l->getLikes();
                 ?>
 
-                <form action="" method="post">
+                <form action="" method="post" class="like-form">
                     <? if($likes['status'] == 1): ?>
                         <input type="hidden" name="unlike" value="<?php echo $row['id'];?>">
                         <input type="submit" class="like-post unlike" data-id="<?php echo ($row['id']. "|" .$_SESSION['user_id']);?>">
@@ -116,8 +108,6 @@ if (!empty($_POST['flag'])) {
                         <input type="submit" class="like-post like" data-id="<?php echo ($row['id']. "|" .$_SESSION['user_id']);?>">
                     <? endif; ?>
                 </form>
-
-
 
 
                 <form action="" method="post" class="comment-form">
