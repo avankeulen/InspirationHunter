@@ -156,6 +156,15 @@ class Post {
         $statement->execute();
     }
 
+    // DISCOVER PAGE 
+
+    public function getEveryPost(){
+        $conn = Db::getInstance();
+        $statement = $conn->prepare("select * from posts");
+        $statement->execute();
+        return $statement;
+    }
+
 
 
 }
