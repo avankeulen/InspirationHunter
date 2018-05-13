@@ -4,6 +4,9 @@ include_once ('classes/Post.class.php');
 include_once ('classes/User.class.php');
 include_once ('classes/Comment.class.php');
 
+$a = new User();
+$allUsers = $a->getAllUsers();
+
 ?><!doctype html>
 <html lang="en">
 <head>
@@ -25,17 +28,35 @@ include_once ('classes/Comment.class.php');
    background-color: grey;
  }
 </style>
-      <div id="map"></div>
+    <div id="map"></div>
  
 
 
     <?php if (isset($result)): ?>
         <?php include_once ('inc/search.inc.php'); ?>
+    <?php else: ?>
+    <div style="margin-top: 20px;">
+        <h3 style="font-weight:700; font-size:1.3em;">People to follow</h3>
+        <ul id="all-users-list">
+            <?php foreach ($allUsers as $a): ?>
+                <li id="user-list-item">
+                    <a href="account.php?userID=<?php echo $a['id']; ?>">
+                        <div id="user-img-div">
+                            <img src="images/uploads/avatar/<?php echo $a['user_img']; ?>" alt="">
+                        </div>
+                        <h3><?php echo $a['username']; ?></h3>
+                    </a>
+                </li>
+            <?php endforeach; ?>
+        </ul>
+    </div>
+
+    <h3 style="font-weight:700; font-size:1.3em; margin-top: 1.3em;">You might like this posts</h3>
     <?php endif; ?>
 
   
-        <h3 style="font-weight:700; font-size:1.3em; margin-top: 1.3em;">You might like this posts</h3>
-        <?php // include_once ('inc/posts.inc.php');?>
+
+    <?php // include_once ('inc/posts.inc.php');?>
   
     
 </section>
