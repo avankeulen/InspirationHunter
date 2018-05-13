@@ -11,6 +11,7 @@ class Post {
     private $time;
     private $post_id;
     private $city;
+    private $tags;
 
     public function postUsername() {
         $conn = Db::getInstance();
@@ -95,6 +96,17 @@ class Post {
     {
         $this->city = $city;
     }
+
+    public function getTags()
+    {
+        return $this->tags;
+    }
+    public function setTags($tags): void
+    {
+        $this->tags = $tags;
+    }
+
+
 
     public function SavePost() {
         $conn = Db::getInstance();

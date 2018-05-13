@@ -4,49 +4,54 @@
 
 if (!empty($_POST)){
     $title = $_POST['title'];
+    $description = $_POST['description'];
     $image = $_FILES['upload_file']['name'];
     $city = htmlspecialchars($_POST['city']);
+    $filter = $_POST['filter'];
+    //$tags = $_POST['tags'];
+    $time = "";
 
     $temp = explode(".", $_FILES['upload_file']['name']);
     $newfilename = round(microtime(true)) . '.' . end($temp);
     $image = $newfilename;
 
-    $filter = $_POST['filter'];
 
-    $description = $_POST['description'];
-    $time = "";
-    //$_POST['time'];
-    $user_id = $_SESSION['username'];
+    $user_id = $_SESSION['user_id'];
 
-    if (!empty($image) && !empty($description) && !empty($title)) {
+    try {
+        if (!empty($image) && !empty($description) && !empty($title) /*&& !empty($tags)*/) {
 
-        $post = new Post();
-        $post->setImage($image);
-        $post->setFilter($filter);
-        $post->setDescription($description);
-        $post->setUserId($user_id);
-        $post->setTitle($title);
-        $post->setTime($time);
-        $post->setCity($city);
+            $post = new Post();
+            $post->setImage($image);
+            $post->setFilter($filter);
+            $post->setDescription($description);
+            $post->setUserId($user_id);
+            $post->setTitle($title);
+            $post->setTime($time);
+            $post->setCity($city);
+            //$post->setTags($tags);
 
-        define ('SITE_ROOT', realpath(dirname(__FILE__)));
+            define ('SITE_ROOT', realpath(dirname(__FILE__)));
 
-        if ($post->SavePost()) {
+            if ($post->SavePost()) {
 
-            $filetmp = $_FILES["upload_file"]["tmp_name"];
-            $filename = $image;
-            
-            $destFile = __DIR__ . '/images/uploads/' . $filename;
-            move_uploaded_file($_FILES['upload_file']['tmp_name'], $destFile);
-            chmod($destFile, 0666);
-            
-            header('location: index.php');
+                $filetmp = $_FILES["upload_file"]["tmp_name"];
+                $filename = $image;
 
+                $destFile = __DIR__ . '/images/uploads/' . $filename;
+                move_uploaded_file($_FILES['upload_file']['tmp_name'], $destFile);
+                chmod($destFile, 0666);
+
+                header('location: index.php');
+
+            } else {
+                $error = "Something went wrong";
+            }
         } else {
-            $error = "Something went wrong";
+            $error = "Leave no empty fields!";
         }
-    } else {
-        $error = "Leave no empty fields!";
+    } catch (Exception $e) {
+        die("The site is down.");
     }
 }
 
@@ -83,6 +88,7 @@ if (!empty($_POST)){
         </div>
         <input type="file" name="upload_file"  accept="image/*" id="upload-file" onchange="readURL(this);">
         <br>
+
         <label for="upload-filter">Filter</label>
         <br>
         <select id="upload-filter" name="filter" placeholder="None" onchange="showFilter();">
@@ -116,10 +122,18 @@ if (!empty($_POST)){
         </select>
         <br>
         <br>
+
         <label for="upload-desc">Description</label>
         <br>
         <input type="text" name="description" placeholder="Description" id="upload-desc">
         <br>
+
+        <!--<label for="upload-tags">Tags</label>
+        <br>
+        <input type="text" name="tags" placeholder="tag1,tag2,..." id="upload-tags">
+        <br>-->
+
+
         <input type="hidden" id="city" name="city" value="unknown location" />
 
         <input type="submit" name="submit" value="Upload">
