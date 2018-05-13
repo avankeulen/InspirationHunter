@@ -448,6 +448,36 @@ h1 {
     background-attachment: fixed;
 }
 
+table {
+    margin: 0 auto;
+}
+table tr {
+    
+}
+.color {
+    padding-top: 5px;
+}
+.color div {
+    width: 40px;
+    height: 40px;
+    border-radius: 40px;
+}
+.color-code {
+    font-size: 1.3em;
+    padding-left: 10px;
+    padding-top: 10px;
+    vertical-align: top;
+}
+#color-title {
+    display: none;
+}
+.detail-img {
+    display: block;
+    width: 300px;
+    margin-left: auto;
+    margin-right: auto;
+    margin-bottom: 20px;
+}
 
 @media only screen and (min-width: 760px) {
     .list {
@@ -472,6 +502,17 @@ h1 {
         color: white;
         text-shadow: 0px 1px 10px #333;
     }
+    .accountanddiscription {
+        display: block;
+        margin-left: 225px;
+        margin-top: -150px;
+        margin-bottom: 30px;
+        height: 100px;
+    }
+    .detail-img {
+        float: left;
+        width: 40vw;
+    }
 }
 
 @media only screen and (max-width: 759px) {
@@ -494,10 +535,10 @@ h1 {
         background-position: center;
         background-size: contain;
         background-repeat: no-repeat;
-        width: 30px;
+        width: 25px;
         height: 70%;
         margin: 0;    
-        margin-right: 10px;
+        margin-right: 5px;
     }
     
     #links #upload-a {
@@ -547,7 +588,9 @@ h1 {
         margin-left: auto;
         margin-right: auto;
     }
-
+    .accountanddiscription {
+        margin-bottom: 20px;
+    }
     
 }
 

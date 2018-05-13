@@ -17,3 +17,17 @@
         </nav>
     </section>
 </header>
+
+
+<?
+
+// SEARCH
+if (!empty($_GET['search'])) {
+    include_once ('classes/Search.class.php');
+    $search_term = $_GET['search'];
+    $test = new Search();
+    $test->setSearchTerm($search_term);
+    $result = $test->_Search();
+}
+
+?>

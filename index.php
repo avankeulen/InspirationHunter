@@ -22,17 +22,6 @@ $getUsername = new Post();
 $username = $getUsername->postUsername();
 
 
-// SEARCH
-if (!empty($_GET['search'])) {
-    include_once ('classes/Search.class.php');
-    $search_term = $_GET['search'];
-    $test = new Search();
-    $test->setSearchTerm($search_term);
-    $result = $test->_Search();
-}
-
-
-
 ?><!doctype html>
 <html lang="en">
 <head>
@@ -47,22 +36,6 @@ if (!empty($_GET['search'])) {
 <section class="content">
     <h1 id="welcome">Welcome, <strong class="username"><?php echo $_SESSION['username']; ?></strong></h1>
 
-    <div>
-        <h3 style="font-weight:700; font-size:1.3em;">People to follow</h3>
-        <ul id="all-users-list">
-            <?php foreach ($allUsers as $a): ?>
-            <li id="user-list-item">
-                <a href="account.php?userID=<?php echo $a['id']; ?>">
-                    <div id="user-img-div">
-                        <img src="images/uploads/avatar/<?php echo $a['user_img']; ?>" alt="">
-                    </div>
-                    <h3><?php echo $a['username']; ?></h3>
-                </a>
-            </li>
-            <?php endforeach; ?>
-        </ul>
-    </div>
-
     <?php if (isset($result)) { ?>
         <? if (count($result) != 0) {?>
             <?php include_once ('inc/search.inc.php'); ?>
@@ -72,6 +45,21 @@ if (!empty($_GET['search'])) {
     <?php } ?>
 
     <?php if (!isset($result)): ?>
+        <div>
+            <h3 style="font-weight:700; font-size:1.3em;">People to follow</h3>
+            <ul id="all-users-list">
+                <?php foreach ($allUsers as $a): ?>
+                    <li id="user-list-item">
+                        <a href="account.php?userID=<?php echo $a['id']; ?>">
+                            <div id="user-img-div">
+                                <img src="images/uploads/avatar/<?php echo $a['user_img']; ?>" alt="">
+                            </div>
+                            <h3><?php echo $a['username']; ?></h3>
+                        </a>
+                    </li>
+                <?php endforeach; ?>
+            </ul>
+        </div>
         <h3 style="font-weight:700; font-size:1.3em;">Your feed</h3>
         <?php include_once ('inc/posts.inc.php');?>
     <?php endif; ?>
