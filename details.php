@@ -1,5 +1,5 @@
 <?php
-
+include_once ('inc/session_check.inc.php');
 include_once ('classes/Detail.class.php');
 include_once ('classes/Post.class.php');
 include_once ('classes/Db.class.php');

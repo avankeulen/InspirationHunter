@@ -34,7 +34,7 @@ if (!empty($_POST)) {
 
 
 <form action="" method="post" id="logreg_form">
-    <img src="images/logotext.svg" alt="">
+    <img src="images/logotext.png" alt="">
     <h1>Login</h1>
     <br>
     <?php if (isset($error)): ?>

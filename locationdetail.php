@@ -34,7 +34,7 @@ $posts = $locationdetails;
 
 
 <section class="content">
-    <h1 id="welcome">Posted in, <strong class="username"><?php echo $location; ?></strong></h1>
+    <h1 id="welcome">Posted in, <strong class="username"><?php echo htmlspecialchars($location); ?></strong></h1>
 
   
     <?php if (isset($result)): ?>
@@ -42,7 +42,7 @@ $posts = $locationdetails;
     <?php else: ?>
   
 
-    <h3 style="font-weight:700; font-size:1.3em; margin-top: 1.3em;">Posts based on <?php echo $location ?></h3>
+    <h3 style="font-weight:700; font-size:1.3em; margin-top: 1.3em;">Posts based on <?php echo htmlspecialchars($location); ?></h3>
     <?php endif; ?>
 
    <?php if (isset($nameresult)) { ?>
