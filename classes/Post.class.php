@@ -11,6 +11,7 @@ class Post {
     private $time;
     private $post_id;
     private $city;
+    private $tags;
 
     public function postUsername() {
         $conn = Db::getInstance();
@@ -96,6 +97,17 @@ class Post {
         $this->city = $city;
     }
 
+    public function getTags()
+    {
+        return $this->tags;
+    }
+    public function setTags($tags): void
+    {
+        $this->tags = $tags;
+    }
+
+
+
     public function SavePost() {
         $conn = Db::getInstance();
         $statement = $conn->prepare("insert into posts (user_id, description, post_img, title, time_set, filter, city) VALUES (:id, :d, :p, :t, :ti, :f, :c)");
@@ -161,6 +173,14 @@ class Post {
     public function getEveryPost(){
         $conn = Db::getInstance();
         $statement = $conn->prepare("select * from posts");
+        $statement->execute();
+        return $statement;
+    }
+
+    public function getLocationDetails(){
+        $conn = Db::getInstance();      
+        $statement = $conn->prepare("select * from posts where city = :loc");
+        $statement->bindValue(":loc", $this->city);
         $statement->execute();
         return $statement;
     }
