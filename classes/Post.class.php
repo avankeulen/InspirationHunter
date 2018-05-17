@@ -7,19 +7,47 @@ class Post {
     private $filter;
     private $description;
     private $user_id;
+    private $user_id2;
+    private $user_id3;
     private $title;
     private $time;
     private $post_id;
     private $city;
     private $tags;
 
-    public function postUsername() {
-        $conn = Db::getInstance();
-        $statementUser = $conn->prepare("select * from users");
-        $statementUser->execute();
-        $res =  $statementUser->fetchAll();
-        return $res;
+    /**
+     * @return mixed
+     */
+    public function getUserId2()
+    {
+        return $this->user_id2;
     }
+
+    /**
+     * @param mixed $user_id2
+     */
+    public function setUserId2($user_id2): void
+    {
+        $this->user_id2 = $user_id2;
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getUserId3()
+    {
+        return $this->user_id3;
+    }
+
+    /**
+     * @param mixed $user_id3
+     */
+    public function setUserId3($user_id3): void
+    {
+        $this->user_id3 = $user_id3;
+    }
+
+
 
     public function getImage()
     {
@@ -161,6 +189,15 @@ class Post {
         $this->post_id = $post_id;
     }
 
+    public function postUsername() {
+        $conn = Db::getInstance();
+        $statementUser = $conn->prepare("select * from users u inner join posts p on u.id = p.user_id where :p = p.user_id");
+        $statementUser->bindValue(":p", $this->getUserId2());
+        $statementUser->execute();
+        $res =  $statementUser->fetch(PDO::FETCH_ASSOC);
+        return $res;
+    }
+
     public function flag_post(){
         $conn = Db::getInstance();
         $statement = $conn->prepare("update posts set flag = flag +1 where id = :id");
@@ -185,6 +222,11 @@ class Post {
         return $statement;
     }
 
-
-
+    public function getLikedPosts() {
+        $conn = Db::getInstance();
+        $statement = $conn->prepare("select * from posts p inner join likes l on p.id = l.post_id where l.status = 1 and l.user_id = :l");
+        $statement->bindValue(":l", $this->getUserId3());
+        $statement->execute();
+        return $statement;
+    }
 }

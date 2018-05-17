@@ -1,6 +1,6 @@
 <?php
 include_once ('inc/session_check.inc.php');
-include_once ('classes/Detail.class.php');
+//include_once ('classes/Detail.class.php');
 include_once ('classes/Post.class.php');
 include_once ('classes/Db.class.php');
 
@@ -38,7 +38,18 @@ $ex=new GetMostCommonColors();
 
 <section class="content">
     <?php foreach( $result as $result ): ?>
-        <h1> <? echo $result['title']?> </h1>
+        <a href="account.php?userID=<?php echo $result['user_id']; ?>" id="user-link-detail">
+            <?php
+                $u = new Post();
+                $u->setUserId2($result['user_id']);
+                $u = $u->postUsername();
+            ?>
+            <div id="user-img-div-detail"><img src="images/uploads/avatar/<?php echo $u['user_img']; ?>" alt=""></div>
+            <h3><?php echo htmlspecialchars($u['username']); ?></h3>
+        </a>
+
+        <h1> <? echo htmlspecialchars($result['title']); ?> </h1>
+        <p id="detail-desc"><? echo htmlspecialchars($result['description']); ?></p>
         <img src="<?php echo 'images/uploads/'.$result['post_img'] ?>" alt="post_img" width="150px" height="auto" class="detail-img">
         <?php $colors=$ex->Get_Color('images/uploads/'.$result['post_img'], $num_results, $reduce_brightness, $reduce_gradients, $delta); ?>
     <?php endforeach; ?>

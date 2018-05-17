@@ -31,7 +31,7 @@ $username = $getUsername->postUsername();
 
 
 <section class="content">
-    <h1 id="welcome">Welcome, <strong class="username"><?php echo $_SESSION['username']; ?></strong></h1>
+    <h1 id="welcome">Welcome, <strong class="username"><?php echo htmlspecialchars($_SESSION['username']); ?></strong></h1>
 
     <?php if (isset($result)) { ?>
         <? if (count($result) != 0) {?>

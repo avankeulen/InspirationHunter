@@ -83,22 +83,33 @@ if (!empty($_POST['comment'])){
         $userDetails = $u->getAccountDetails($g_userID);
 
         $post = new Post();
-        $posts = $post->getCustomPosts($g_userID);
+        $likePost = new Post();
+        if (!isset($_GET['likes'])) {
+            $posts = $post->getCustomPosts($g_userID);
+        } else {
 
+            //Hier gaat het mis!!!
+            if($g_userID == $user_id) {
+                $likePost->setUserId3($_SESSION['user_id']);
+            } else {
+                $likePost->setUserId3($_GET["userID"]);
+            }
+            $posts = $likePost->getLikedPosts();
+        }
     ?>
 
        
     
     <div class="user-info">
         <section class="content">
-            <h1> <?php echo $userDetails['username']?> </h1>
+            <h1> <?php echo htmlspecialchars($userDetails['username']); ?> </h1>
 
             <div id="profilepic-holder" style="border-radius: 100px; overflow: hidden; width: 200px; height: 200px;">
                 <img class="profilepic" src="images/uploads/avatar/<? echo $userDetails['user_img'];?>" style="width: 200px" alt="Profilepic">
             </div>
 
             <div class="accountanddiscription">
-                <h1 style="font-size: 1.3em; color: grey; margin: 20px 0px 0px 0px; font-weight: 10; color: whitesmoke;"  class="bio"><span style="color: darkgray;">Bio:</span> <?php echo $userDetails['bio'] ?></h1>
+                <h1 style="font-size: 1.3em; color: grey; margin: 20px 0px 0px 0px; font-weight: 10; color: whitesmoke;"  class="bio"><span style="color: darkgray;">Bio:</span> <?php echo htmlspecialchars($userDetails['bio']); ?></h1>
             </div>
             
             <?php if($g_userID == $user_id){ ?>
@@ -114,8 +125,20 @@ if (!empty($_POST['comment'])){
     
 <section class="content">
     <section class="login-form-wrap2">
-        <h1 style="font-size: 1.5em;"> <?if($g_userID == $user_id){?>MY<?}?> POSTS </h1>
-        <?php include_once ('inc/posts.inc.php'); ?>
+        
+        <nav class="profile_nav">
+            <? if($g_userID == $user_id): ?>
+            <li><a href="account.php">MY POSTS</a></li>
+            <li><a href="account.php?likes=yes">MY LIKES</a></li>
+            <? else : ?>
+            <li><a href="account.php?userID=<? echo $g_userID; ?>">POSTS</a></li>
+            <li><a href="account.php?userID=<? echo $g_userID; ?>&likes=yes">LIKES</a></li>
+            <? endif; ?>
+        </nav>
+        
+        <h1 style="font-size: 1.5em;">  </h1>
+        <? include_once ('inc/posts.inc.php'); ?>
+
     </section>
 </section>
 

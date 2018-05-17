@@ -42,7 +42,7 @@ if (!empty($_POST)) {
     <h1>Register</h1>
     <br>
     <?php if (isset($error)): ?>
-        <div class="form_error"><?php echo $error; ?></div>
+        <div class="form_error"><?php echo htmlspecialchars($error); ?></div>
     <?php endif; ?>
     <label for="username">Username</label>
     <br>

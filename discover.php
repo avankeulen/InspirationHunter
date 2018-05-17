@@ -6,6 +6,7 @@ include_once ('classes/Comment.class.php');
 
 $a = new User();
 $allUsers = $a->getAllUsers();
+rsort($allUsers);
 
 $post = new Post();
 $posts = $post->getEveryPost();
