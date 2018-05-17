@@ -25,7 +25,7 @@ $username = $getUsername->postUsername();
 
 
 <section class="content">
-    <h1 id="welcome">Let's find some people to follow, <strong class="username"><?php echo $_SESSION['username']; ?></strong></h1>
+    <h1 id="welcome">Let's find some people to follow, <strong class="username"><?php echo htmlspecialchars($_SESSION['username']); ?></strong></h1>
 
 <style>
  #map {
@@ -46,11 +46,11 @@ $username = $getUsername->postUsername();
         <ul id="all-users-list">
             <?php foreach ($allUsers as $a): ?>
                 <li id="user-list-item">
-                    <a href="account.php?userID=<?php echo $a['id']; ?>">
+                    <a href="account.php?userID=<?php echo htmlspecialchars($a['id']); ?>">
                         <div id="user-img-div">
-                            <img src="images/uploads/avatar/<?php echo $a['user_img']; ?>" alt="">
+                            <img src="images/uploads/avatar/<?php echo htmlspecialchars($a['user_img']); ?>" alt="">
                         </div>
-                        <h3><?php echo $a['username']; ?></h3>
+                        <h3><?php echo htmlspecialchars($a['username']); ?></h3>
                     </a>
                 </li>
             <?php endforeach; ?>
