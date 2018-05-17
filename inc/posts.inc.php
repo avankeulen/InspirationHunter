@@ -55,14 +55,18 @@ if (!empty($_POST['flag'])) {
             <li class="post" data-id="<?php echo $row['id'];?>" value="<?php echo $row['id'];?>">
 
                 <a href="account.php?userID=<?php echo $row['user_id']; ?>" id="user-link">
-                    <?php foreach ($username as $u): ?>
-                        <?php if ($row['user_id'] == $u['id']):?>
+                    <?php //foreach ($username as $u):
+                        $u = new Post();
+                        $u->setUserId2($row['user_id']);
+                        $u = $u->postUsername();
+                    ?>
+                        <?php //if ($row['user_id'] == $u['id']):?>
                             <div id="user-img-div"><img src="images/uploads/avatar/<?php echo $u['user_img']; ?>" alt=""></div>
                             <h3><?php echo htmlspecialchars($u['username']); ?></h3>
                             <br><p id="time-set"><?php echo $row['time_set']; ?></p>
 
-                        <?php endif; ?>
-                    <?php endforeach; ?>
+                        <?php //endif; ?>
+                    <?php //endforeach; ?>
                 </a>
 
                 <a class="locationName" href="locationdetail.php?city=<?php echo $row['city']; ?>"><? echo $row['city']; ?></a>
@@ -88,9 +92,6 @@ if (!empty($_POST['flag'])) {
                 <p><?php echo htmlspecialchars($row['description']); ?></p>
 
 
-
-
-
                 <!-- LIKES -->
                 <?php
                     $likes = "";
@@ -101,7 +102,7 @@ if (!empty($_POST['flag'])) {
                 ?>
 
                 <form action="" method="post" class="like-form">
-                    <? if($likes['status'] == 1): ?>
+                    <? if($likes['status'] == 1 || isset($_GET['likes'])): ?>
                         <input type="hidden" name="unlike" value="<?php echo $row['id'];?>">
                         <input type="submit" class="like-post unlike" data-id="<?php echo ($row['id']. "|" .$_SESSION['user_id']);?>">
                     <? else: ?>
