@@ -85,10 +85,10 @@ if( $statement->rowCount() > 0){
 
         <form class="password-form" method="POST" action="" enctype="multipart/form-data" id="upload-form">
             <label>username :
-                <input class="textbox" type="text" name="username" value=<?php echo $user['username'] ?> >
+                <input class="textbox" type="text" name="username" value=<?php echo htmlspecialchars($user['username']); ?> >
             </label><br />
             <label>Bio :
-                <input class="textbox" type="text" name="bio" value=<?php echo $user['bio'] ?> >
+                <input class="textbox" type="text" name="bio" value=<?php echo htmlspecialchars($user['bio']); ?> >
             </label><br />
 
             <label for="profilePicture">My Profile Picture</label>
