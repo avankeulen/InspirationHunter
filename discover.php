@@ -69,13 +69,13 @@ $username = $getUsername->postUsername();
 <script src="js/script.js"></script>
 <script>
       function initMap() {
-        var uluru = {lat: -25.363, lng: 131.044};
+        var mechelen = {lat: 51.02473306, lng: 4.48443504};
         var map = new google.maps.Map(document.getElementById('map'), {
-          zoom: 4,
-          center: uluru
+          zoom: 16,
+          center: mechelen
         });
         var marker = new google.maps.Marker({
-          position: uluru,
+          position: mechelen,
           map: map
         });
       }
